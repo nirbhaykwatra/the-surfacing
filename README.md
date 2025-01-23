@@ -2,7 +2,7 @@
 The Surfacing is a 3D third-person over the shoulder platformer that takes place in a fishtank. The player is a toy diver who strives to escape the fish tank using nothing but his trusty bubble gun.
 
 ### Documentation  
-[Google Drive](https://docs.google.com/document/d/184DbyGPzvWfKYIc1z0Xxowl0Wpw32XnOIUGRRNNANok/edit?usp=sharing)
+[Google Drive](https://drive.google.com/drive/folders/1q_OfXqR_O20SYBHPg2G8r6H7CazF7Q3O?usp=sharing)
 
 ### Gameplay Controls  
 Action               | Keyboard Control  | Gamepad Control
