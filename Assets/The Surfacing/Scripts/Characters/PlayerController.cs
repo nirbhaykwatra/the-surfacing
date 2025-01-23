@@ -12,14 +12,16 @@ public class PlayerController : MonoBehaviour
     // make character look in Camera direction instead of MoveDirection
     [field: SerializeField] protected bool LookInCameraDirection { get; set; }
 
-    [field: Header("Componenents")]
+    [field: Header("Components")]
     [field: SerializeField] protected CharacterMovementBase Movement { get; set; }
+    [field: SerializeField] protected BubbleGun BubbleGun { get; set; }
 
     protected Vector2 MoveInput { get; set; }
 
     protected virtual void OnValidate()
     {
-        if(Movement == null) Movement = GetComponent<CharacterMovementBase>();
+        if (Movement == null) Movement = GetComponent<CharacterMovementBase>();
+        if (BubbleGun == null) BubbleGun = GetComponent<BubbleGun>();
     }
 
     protected virtual void Awake()
@@ -39,7 +41,8 @@ public class PlayerController : MonoBehaviour
 
     public virtual void OnFire(InputValue value)
     {
-        // placeholder for shooting stuff
+        //  TODO: Create tunable value for bubble spawn distance from the player.
+        BubbleGun.CreateBubble((transform.forward * 2) + (transform.position + Vector3.up));
     }
 
     protected virtual void Update()
@@ -56,5 +59,11 @@ public class PlayerController : MonoBehaviour
         Movement.SetMoveInput(moveInput);
         Movement.SetLookDirection(moveInput);
         if (LookInCameraDirection) Movement.SetLookDirection(Camera.main.transform.forward);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere((transform.forward * 2) + (transform.position + Vector3.up),0.2f);
     }
 }
