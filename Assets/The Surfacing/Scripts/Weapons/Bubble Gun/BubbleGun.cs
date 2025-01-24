@@ -36,7 +36,6 @@ public class BubbleGun : MonoBehaviour
             _bubbles.Add(bubbleComponent);
             bubbleComponent.PushBubble(destination, Time.deltaTime * BubbleTravelTime);
         }
-        
     }
     
     private void OnDrawGizmosSelected()
