@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61759c46143d3d44cafd0ebc4a3ef51f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Lifespan>k__BackingField: 5
+  <Lifespan>k__BackingField: 15
   <RiseSpeed>k__BackingField: 0.5
-  <Rise>k__BackingField: 1
+  <AttachmentSpeed>k__BackingField: 2
+  <AttachmentOffset>k__BackingField: 0.05
+  <Rise>k__BackingField: 0
