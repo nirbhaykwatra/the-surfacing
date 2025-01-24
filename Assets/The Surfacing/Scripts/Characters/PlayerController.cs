@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     public virtual void OnFire(InputValue value)
     {
         //  TODO: Create tunable value for bubble spawn distance from the player.
-        BubbleGun.CreateBubble((transform.forward * 2) + (transform.position + Vector3.up));
+        BubbleGun.CreateBubble();
     }
 
     protected virtual void Update()
@@ -59,11 +59,5 @@ public class PlayerController : MonoBehaviour
         Movement.SetMoveInput(moveInput);
         Movement.SetLookDirection(moveInput);
         if (LookInCameraDirection) Movement.SetLookDirection(Camera.main.transform.forward);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere((transform.forward * 2) + (transform.position + Vector3.up),0.2f);
     }
 }
