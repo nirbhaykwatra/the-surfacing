@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Bubble : MonoBehaviour
 {
     [field: SerializeField] private float Lifespan { get; set; }
@@ -12,30 +12,26 @@ public class Bubble : MonoBehaviour
     [field: SerializeField] private float AttachmentSpeed { get; set; } = 0.8f;
     [Tooltip("How far a bubble is when it attaches to a liftable object")]
     [field: SerializeField] private float AttachmentOffset { get; set; } = 0.05f;
-    [field: SerializeField] public bool Rise { get; set; } = false;
+    [field: SerializeField] public bool Rise { get; set; }
     
     private Rigidbody _rb;
     private BoxCollider _collider;
-    private bool _hasPopped = false;
+    private bool _hasPopped;
     private float _lifeSpanTimer;
-    private Vector3 _riseVelocity;
+    
+    public UnityEvent OnDestroyed;
 
     private void OnEnable()
     {
-        if (_rb == null) _rb = GetComponent<Rigidbody>();
-        if (_collider == null) _collider = GetComponent<BoxCollider>();
+        _rb = GetComponent<Rigidbody>();
+        _collider = GetComponent<BoxCollider>();
         Rise = false;
         _hasPopped = false;
-        _rb.useGravity = false;
-        _rb.isKinematic = true;
-        //_collider.isTrigger = true;
-        _riseVelocity = new Vector3(0, RiseSpeed, 0);
     }
 
     private void FixedUpdate()
     {
-        if (_rb == null) return;
-        if (!_hasPopped && Rise) _rb.MovePosition(transform.position + Vector3.up * (Time.deltaTime * RiseSpeed));
+        if (!_hasPopped && Rise) transform.position = (transform.position + Vector3.up * (Time.fixedDeltaTime * RiseSpeed));
     }
 
     private void Update()
@@ -43,7 +39,6 @@ public class Bubble : MonoBehaviour
         if (!_hasPopped)
         {
             _lifeSpanTimer += Time.deltaTime;
-
             if (_lifeSpanTimer >= Lifespan)
             {
                 _hasPopped = true;
@@ -52,14 +47,36 @@ public class Bubble : MonoBehaviour
         else
         {
             _lifeSpanTimer = 0;
+            OnDestroyed?.Invoke();
             Destroy(gameObject);
+            
         }
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Character"))
+        {
+            return;
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Liftable"))
+        {
+            
+        }
+        else
+        {
+            _hasPopped = true;
+        }
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+    }
+
     public void PushBubble(Vector3 destination, float time)
     {
-        // TODO: Currently, the bubbles' velocity increases the farther the player moves from world center.
-        //  The force added to the bubble should be unaffected by any variable but the shooting force applied.
         StartCoroutine(MoveBubble(destination, time));
     }
 
@@ -70,8 +87,13 @@ public class Bubble : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, destination, time);
             yield return null;
         }
-        //_rb.isKinematic = false;
         Rise = true;
         yield break;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, _collider.size);
     }
 }
