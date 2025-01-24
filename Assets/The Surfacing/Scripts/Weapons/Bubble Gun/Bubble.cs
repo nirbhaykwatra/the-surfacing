@@ -1,15 +1,21 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Bubble : MonoBehaviour
 {
     [field: SerializeField] private float Lifespan { get; set; }
-    
     [field: SerializeField] private float RiseSpeed { get; set; } = 9.81f;
-    [field: SerializeField] private bool Rise { get; set; } = true;
+    [Tooltip("How fast a bubble attaches to a liftable object")]
+    [field: SerializeField] private float AttachmentSpeed { get; set; } = 0.8f;
+    [Tooltip("How far a bubble is when it attaches to a liftable object")]
+    [field: SerializeField] private float AttachmentOffset { get; set; } = 0.05f;
+    [field: SerializeField] public bool Rise { get; set; } = false;
     
     private Rigidbody _rb;
+    private SphereCollider _collider;
     private bool _hasPopped = false;
     private float _lifeSpanTimer;
     private Vector3 _riseVelocity;
@@ -17,8 +23,12 @@ public class Bubble : MonoBehaviour
     private void OnEnable()
     {
         if (_rb == null) _rb = GetComponent<Rigidbody>();
+        if (_collider == null) _collider = GetComponent<SphereCollider>();
+        Rise = false;
         _hasPopped = false;
         _rb.useGravity = false;
+        _rb.isKinematic = true;
+        _collider.isTrigger = true;
         _riseVelocity = new Vector3(0, RiseSpeed, 0);
     }
 
@@ -41,14 +51,29 @@ public class Bubble : MonoBehaviour
         }
         else
         {
+            _lifeSpanTimer = 0;
             Destroy(gameObject);
         }
     }
 
-    public void PushBubble(Vector3 direction, float force)
+    
+
+    public void PushBubble(Vector3 destination, float time)
     {
         // TODO: Currently, the bubbles' velocity increases the farther the player moves from world center.
         //  The force added to the bubble should be unaffected by any variable but the shooting force applied.
-        _rb.AddRelativeForce(new Vector3(direction.x, 0f, direction.z) * force, ForceMode.Impulse);
+        StartCoroutine(MoveBubble(destination, time));
+    }
+
+    private IEnumerator MoveBubble(Vector3 destination, float time)
+    {
+        while (Vector3.Distance(transform.position, destination) > AttachmentOffset)
+        {
+            transform.position = Vector3.Lerp(transform.position, destination, time);
+            yield return null;
+        }
+        _rb.isKinematic = false;
+        Rise = true;
+        yield break;
     }
 }
