@@ -166,7 +166,7 @@ public class CharacterMovement3D : CharacterMovementBase
 
                 if (IsClampedToNavMesh)
                 {
-                    Vector3 pathPoint = transform.position + pathDir * Speed * ClampLookAheadTime;
+                    Vector3 pathPoint = transform.position + pathDir * (Speed * ClampLookAheadTime);
                     Vector3 clampedPathPoint = ClampToNavMesh(pathPoint, ClampSearchRadius);
                     Debug.DrawLine(transform.position, pathPoint, Color.magenta);
                     pathDir = (clampedPathPoint - transform.position).normalized;
@@ -184,6 +184,7 @@ public class CharacterMovement3D : CharacterMovementBase
 
         // syncs navmeshagent position with character position
         NavMeshAgent.nextPosition = transform.position;
+        Debug.Log($"MoveInput: {MoveInput}, Gravity: {Gravity}");
 
         // find flattened movement vector based on ground normal
         Vector3 input = MoveInput;
@@ -216,6 +217,12 @@ public class CharacterMovement3D : CharacterMovementBase
         Rigidbody.AddForce(acceleration * Rigidbody.mass);
 
         StepCheck();
+
+        /*if (!IsGrounded && MoveInput.magnitude < 0.2f)
+        {
+            Rigidbody.linearVelocity = Vector3.zero;
+            Velocity = new Vector3(Velocity.x, Gravity, Velocity.z);
+        }*/
     }
 
     protected virtual void Update()
