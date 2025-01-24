@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Bubble : MonoBehaviour
 {
@@ -13,9 +14,10 @@ public class Bubble : MonoBehaviour
     [Tooltip("How far a bubble is when it attaches to a liftable object")]
     [field: SerializeField] private float AttachmentOffset { get; set; } = 0.05f;
     [field: SerializeField] public bool Rise { get; set; }
+    [field: SerializeField] public bool InCurrent { get; set; }
     
-    private Rigidbody _rb;
-    private BoxCollider _collider;
+    public Rigidbody BubbleRb;
+    public BoxCollider _collider;
     private bool _hasPopped;
     private bool _isAttached;
     private float _lifeSpanTimer;
@@ -24,22 +26,30 @@ public class Bubble : MonoBehaviour
 
     private void OnEnable()
     {
-        _rb = GetComponent<Rigidbody>();
+        BubbleRb = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
         Rise = false;
+        InCurrent = false;
         _hasPopped = false;
         _isAttached = false;
     }
 
     private void FixedUpdate()
     {
-        if (!_hasPopped && Rise) transform.position += Vector3.up * (Time.fixedDeltaTime * RiseSpeed);
+        if (!InCurrent)
+        {
+            if (!_hasPopped && Rise) transform.position += Vector3.up * (Time.fixedDeltaTime * RiseSpeed);
+        }
     }
 
     private void Update()
     {
         if (!_hasPopped)
         {
+            if (InCurrent)
+            {
+                StopCoroutine(MoveBubble(transform.position, 0.1f));
+            }
             _lifeSpanTimer += Time.deltaTime;
             if (_lifeSpanTimer >= Lifespan)
             {
@@ -57,7 +67,7 @@ public class Bubble : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Character"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Character") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             return;
         }
