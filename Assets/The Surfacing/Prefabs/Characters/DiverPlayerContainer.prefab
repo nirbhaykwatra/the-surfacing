@@ -664,6 +664,7 @@ MonoBehaviour:
   <BubbleSpawnDistance>k__BackingField: 0
   <BubbleTravelDistance>k__BackingField: 0
   <BubbleTravelTime>k__BackingField: 0
+  <MaxBubbleInstances>k__BackingField: 5
 --- !u!4 &2154477070037498299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a2f8ac7e0ad362c47b51e28357d009a1,
