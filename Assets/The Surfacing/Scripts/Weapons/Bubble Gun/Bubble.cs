@@ -17,6 +17,7 @@ public class Bubble : MonoBehaviour
     private Rigidbody _rb;
     private BoxCollider _collider;
     private bool _hasPopped;
+    private bool _isAttached;
     private float _lifeSpanTimer;
     
     public UnityEvent OnDestroyed;
@@ -27,11 +28,12 @@ public class Bubble : MonoBehaviour
         _collider = GetComponent<BoxCollider>();
         Rise = false;
         _hasPopped = false;
+        _isAttached = false;
     }
 
     private void FixedUpdate()
     {
-        if (!_hasPopped && Rise) transform.position = (transform.position + Vector3.up * (Time.fixedDeltaTime * RiseSpeed));
+        if (!_hasPopped && Rise) transform.position += Vector3.up * (Time.fixedDeltaTime * RiseSpeed);
     }
 
     private void Update()
@@ -47,9 +49,9 @@ public class Bubble : MonoBehaviour
         else
         {
             _lifeSpanTimer = 0;
+            _isAttached = false;
             OnDestroyed?.Invoke();
             Destroy(gameObject);
-            
         }
     }
 
@@ -61,7 +63,7 @@ public class Bubble : MonoBehaviour
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Liftable"))
         {
-            
+            _collider.isTrigger = true;
         }
         else
         {
@@ -72,7 +74,45 @@ public class Bubble : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Liftable"))
+        {
+            if (other.gameObject.TryGetComponent(out Liftable liftable))
+            {
+                //if (liftable._bubble != null) return;
+                StopCoroutine(MoveBubble(liftable.gameObject.transform.position, 0.1f));
+                liftable._bubble = this;
+                liftable.LiftableRb.isKinematic = true;
+                liftable.LiftableRb.useGravity = false;
+                transform.localScale = liftable._boxCollider.size * 2;
+                liftable.transform.position = transform.position;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Liftable"))
+        {
+            if (other.gameObject.TryGetComponent(out Liftable liftable))
+            {
+                //if (liftable._bubble != null) return;
+
+                if (Vector3.Distance(transform.position, liftable.gameObject.transform.position) > AttachmentOffset)
+                {
+                    //liftable.transform.position = Vector3.Lerp(liftable.transform.position, transform.position, AttachmentSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    _isAttached = true;
+                }
+                
+                if (!_hasPopped && _isAttached)
+                {
+                    transform.position += Vector3.up * (Time.deltaTime * RiseSpeed);
+                    liftable.gameObject.transform.position = transform.position;
+                }
+            }
+        }
     }
 
     public void PushBubble(Vector3 destination, float time)
@@ -91,7 +131,7 @@ public class Bubble : MonoBehaviour
         yield break;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, _collider.size);
