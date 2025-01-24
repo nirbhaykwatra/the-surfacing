@@ -97,6 +97,14 @@ public class Bubble : MonoBehaviour
                 liftable.transform.position = transform.position;
             }
         }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
+        {
+            return;
+        }
+        else
+        {
+            _hasPopped = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
