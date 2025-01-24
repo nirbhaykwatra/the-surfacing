@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BubbleGun : MonoBehaviour
@@ -8,13 +9,17 @@ public class BubbleGun : MonoBehaviour
     [field: SerializeField] public float BubbleSpawnDistance { get; set; }
     [field: SerializeField] public float BubbleTravelDistance { get; set; }
     [field: SerializeField] public float BubbleTravelTime { get; set; }
+
+    [field: SerializeField] public int MaxBubbleInstances { get; set; } = 5;
     
-    private void Start()
+    private List<Bubble> _bubbles;
+    
+    private void Awake()
     {
-        
+        _bubbles = new List<Bubble>();
     }
     
-    private void FixedUpdate()
+    private void Update()
     {
         
     }
@@ -25,21 +30,13 @@ public class BubbleGun : MonoBehaviour
         Vector3 destination = (transform.forward * (BubbleSpawnDistance + BubbleTravelDistance)) + (transform.position + Vector3.up);
         
         GameObject bubble = Instantiate(_bubble, spawnPosition, Quaternion.identity);
-        
-        if (bubble.TryGetComponent(out Bubble bubbleComponent)) bubbleComponent.PushBubble(destination, Time.deltaTime * BubbleTravelTime);
 
-        //StartCoroutine(MoveBubble(bubble, bubble.transform.position, destination, Time.deltaTime * BubbleTravelTime));
-    }
-
-    private IEnumerator MoveBubble(GameObject bubble, Vector3 spawnPosition, Vector3 destination, float time)
-    {
-        if (Vector3.Distance(bubble.transform.position, destination) > 0.05f)
+        if (bubble.TryGetComponent(out Bubble bubbleComponent))
         {
-            bubble.transform.position = Vector3.Lerp(bubble.transform.position, destination, time);
-            yield return null;
+            _bubbles.Add(bubbleComponent);
+            bubbleComponent.PushBubble(destination, Time.deltaTime * BubbleTravelTime);
         }
-
-        //if (bubble.TryGetComponent(out Bubble outBubble)) outBubble.Rise = true;
+        
     }
     
     private void OnDrawGizmosSelected()
