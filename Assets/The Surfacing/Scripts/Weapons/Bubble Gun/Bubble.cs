@@ -7,8 +7,8 @@ using UnityEngine.Serialization;
 
 public class Bubble : MonoBehaviour
 {
-    [field: SerializeField] private float Lifespan { get; set; }
-    [field: SerializeField] private float RiseSpeed { get; set; } = 9.81f;
+    [field: SerializeField] public float Lifespan { get; set; }
+    [field: SerializeField] public float RiseSpeed { get; set; } = 9.81f;
     [Tooltip("How fast a bubble attaches to a liftable object")]
     [field: SerializeField] private float AttachmentSpeed { get; set; } = 0.8f;
     [Tooltip("How far a bubble is when it attaches to a liftable object")]
