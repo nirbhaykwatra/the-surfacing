@@ -15,7 +15,7 @@ public class Bubble : MonoBehaviour
     [field: SerializeField] public bool Rise { get; set; } = false;
     
     private Rigidbody _rb;
-    private SphereCollider _collider;
+    private BoxCollider _collider;
     private bool _hasPopped = false;
     private float _lifeSpanTimer;
     private Vector3 _riseVelocity;
@@ -23,19 +23,19 @@ public class Bubble : MonoBehaviour
     private void OnEnable()
     {
         if (_rb == null) _rb = GetComponent<Rigidbody>();
-        if (_collider == null) _collider = GetComponent<SphereCollider>();
+        if (_collider == null) _collider = GetComponent<BoxCollider>();
         Rise = false;
         _hasPopped = false;
         _rb.useGravity = false;
         _rb.isKinematic = true;
-        _collider.isTrigger = true;
+        //_collider.isTrigger = true;
         _riseVelocity = new Vector3(0, RiseSpeed, 0);
     }
 
     private void FixedUpdate()
     {
         if (_rb == null) return;
-        if (!_hasPopped && Rise) _rb.AddForce(_riseVelocity, ForceMode.Force);
+        if (!_hasPopped && Rise) _rb.MovePosition(transform.position + Vector3.up * (Time.deltaTime * RiseSpeed));
     }
 
     private void Update()
@@ -55,9 +55,7 @@ public class Bubble : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     
-
     public void PushBubble(Vector3 destination, float time)
     {
         // TODO: Currently, the bubbles' velocity increases the farther the player moves from world center.
@@ -72,7 +70,7 @@ public class Bubble : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, destination, time);
             yield return null;
         }
-        _rb.isKinematic = false;
+        //_rb.isKinematic = false;
         Rise = true;
         yield break;
     }
