@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Lifespan>k__BackingField: 10
-  <RiseSpeed>k__BackingField: 0.5
-  <AttachmentSpeed>k__BackingField: 2
+  <RiseSpeed>k__BackingField: 0.7
+  <AttachmentSpeed>k__BackingField: 0.5
   <AttachmentOffset>k__BackingField: 0.05
   <Rise>k__BackingField: 0
   OnDestroyed:
