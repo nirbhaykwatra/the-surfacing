@@ -518,7 +518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 5
   <Acceleration>k__BackingField: 10
-  <TurnSpeed>k__BackingField: 15
+  <TurnSpeed>k__BackingField: 100
   <StoppingDistance>k__BackingField: 0.25
   <LookInMoveDirection>k__BackingField: 1
   <ControlRotation>k__BackingField: 1
@@ -526,17 +526,17 @@ MonoBehaviour:
   <ParentToSurface>k__BackingField: 0
   <Gravity>k__BackingField: -20
   <JumpHeight>k__BackingField: 2.25
-  <AirControl>k__BackingField: 0.1
+  <AirControl>k__BackingField: 0.5
   <AirTurning>k__BackingField: 1
   <Height>k__BackingField: 1.8
   <Radius>k__BackingField: 0.3
   <GroundCheckOffset>k__BackingField: 0.1
   <GroundCheckDistance>k__BackingField: 0.4
   <MaxSlopeAngle>k__BackingField: 40
-  <CoyoteMaxJumpDistance>k__BackingField: 0.5
+  <CoyoteMaxJumpDistance>k__BackingField: 1
   <GroundMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2241
   <MinGroundedVelocity>k__BackingField: 5
   OnGrounded:
     m_PersistentCalls:
@@ -661,9 +661,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bubble: {fileID: 1437452151016944135, guid: 503f642ef7af02d4f872d20d157641b5, type: 3}
-  <BubbleSpawnDistance>k__BackingField: 0
-  <BubbleTravelDistance>k__BackingField: 0
-  <BubbleTravelTime>k__BackingField: 0
+  <BubbleSpawnDistance>k__BackingField: 1
+  <BubbleTravelDistance>k__BackingField: 2
+  <BubbleTravelTime>k__BackingField: 3
   <MaxBubbleInstances>k__BackingField: 5
 --- !u!4 &2154477070037498299 stripped
 Transform:
