@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Demo/Scenes/3DGeneral.unity
     guid: fa65b82cf01e3ac419949ae83b762bdf
+  - enabled: 1
+    path: Assets/The Surfacing/Scenes/Gyms/mechanics-gym.unity
+    guid: 44d7679caabc386459a9b94745afac89
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

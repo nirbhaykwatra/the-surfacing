@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{6fc2f9fa-d6b8-4f0c-80a4-07c646e5d20f}">
+	<object class="AudioFile" id="{992c0afa-af16-48af-b726-96adc7b5337f}">
 		<property name="assetPath">
-			<value>Music/REEL BM-185 B ROCKET MARCH WILFRED BURNS 229.wav</value>
+			<value>Music/A_Robust_Crew_by_Darren_Curtis.mp3</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
@@ -14,7 +14,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>148.90618749999999</value>
+			<value>136.77600000000001</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{0007398a-8526-4222-84a0-9fc057cc09e5}</destination>
