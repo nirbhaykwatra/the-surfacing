@@ -318,12 +318,13 @@
         },
         "preventRotation": false
     },
-    "m_Path": "VFS",
+    "m_Path": "FD",
     "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "b96dfae9f53043d9be4669c5e6ede689"
@@ -709,10 +710,10 @@
         "w": 1.0
     },
     "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "w": 1.0
     },
     "m_Labels": []
 }
@@ -829,8 +830,8 @@
     "m_ObjectId": "2ed05fd594cc4436b0f63588a6f86cb4",
     "m_Title": "Metal/smooth",
     "m_Position": {
-        "x": 10.0,
-        "y": 10.0
+        "x": 1213.60009765625,
+        "y": -63.199951171875
     }
 }
 
@@ -1382,7 +1383,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -1394,6 +1395,7 @@
     "m_ObjectId": "89bb538459f447bba1d72a7d39094edf",
     "m_RayTracing": false,
     "m_MaterialType": 0,
+    "m_MaterialTypeMask": 2,
     "m_RefractionModel": 0,
     "m_SSSTransmission": true,
     "m_EnergyConservingSpecular": true,
@@ -1724,7 +1726,7 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.Rendering.HighDefinition.ShaderGraph.SystemData",
     "m_ObjectId": "a5f6541f2635473ab9eef2715de7c36d",
-    "m_MaterialNeedsUpdateHash": 529,
+    "m_MaterialNeedsUpdateHash": 0,
     "m_SurfaceType": 0,
     "m_RenderingPass": 1,
     "m_BlendMode": 0,
@@ -1734,6 +1736,7 @@
     "m_OpaqueCullMode": 2,
     "m_SortPriority": 0,
     "m_AlphaTest": false,
+    "m_ExcludeFromTUAndAA": false,
     "m_TransparentDepthPrepass": false,
     "m_TransparentDepthPostpass": false,
     "m_SupportLodCrossFade": false,
@@ -1748,7 +1751,8 @@
     "m_TessellationShapeFactor": 0.75,
     "m_TessellationBackFaceCullEpsilon": -0.25,
     "m_TessellationMaxDisplacement": 0.009999999776482582,
-    "m_Version": 1,
+    "m_DebugSymbols": false,
+    "m_Version": 2,
     "inspectorFoldoutMask": 9
 }
 
@@ -2005,7 +2009,7 @@
     ],
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false,
-    "m_SupportComputeForVertexSetup": false
+    "m_SupportLineRendering": false
 }
 
 {
@@ -2072,8 +2076,8 @@
     "m_ObjectId": "c464b3624dd4432c9c625fb5187f7a94",
     "m_Title": "Base texture/color",
     "m_Position": {
-        "x": 238.0000457763672,
-        "y": -188.00003051757813
+        "x": 237.6000213623047,
+        "y": -188.80001831054688
     }
 }
 
@@ -2093,6 +2097,7 @@
     "m_BackThenFrontRendering": false,
     "m_TransparentDepthPrepass": false,
     "m_TransparentDepthPostpass": false,
+    "m_TransparentPerPixelSorting": false,
     "m_SupportLodCrossFade": false
 }
 
@@ -2209,8 +2214,8 @@
     "m_ObjectId": "da34555b4cac4ed582095d6d248a7cec",
     "m_Title": "Select normal or prototype color",
     "m_Position": {
-        "x": 425.0,
-        "y": 189.00003051757813
+        "x": 388.800048828125,
+        "y": 187.99996948242188
     }
 }
 
