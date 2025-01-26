@@ -12,7 +12,7 @@ public class BubbleGun : MonoBehaviour
 
     [field: SerializeField] public int MaxBubbleInstances { get; set; } = 5;
     
-    private List<Bubble> _bubbles;
+    public List<Bubble> _bubbles;
     
     private void Awake()
     {
@@ -21,7 +21,15 @@ public class BubbleGun : MonoBehaviour
     
     private void Update()
     {
-        
+        Debug.Log($"Bubble instances: {_bubbles.Count}");
+        if (_bubbles.Count - 1 >= MaxBubbleInstances)
+        {
+            if (_bubbles[0] != null)
+            {
+                Destroy(_bubbles[0].gameObject);
+                _bubbles.RemoveAt(0);
+            }
+        }
     }
 
     public void CreateBubble()
