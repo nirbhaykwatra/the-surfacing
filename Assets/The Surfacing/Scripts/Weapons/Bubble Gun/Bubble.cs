@@ -24,6 +24,7 @@ public class Bubble : MonoBehaviour
     public BoxCollider _collider;
     private bool _hasPopped;
     private bool _isAttached;
+    private bool _hasTraveled;
     private float _lifeSpanTimer;
     private BubbleGun _bubbleGun;
     
@@ -38,6 +39,7 @@ public class Bubble : MonoBehaviour
         InCurrent = false;
         _hasPopped = false;
         _isAttached = false;
+        _hasTraveled = false;
     }
 
     private void Start()
@@ -61,10 +63,14 @@ public class Bubble : MonoBehaviour
             {
                 StopCoroutine(MoveBubble(transform.position, 0.1f));
             }
-            _lifeSpanTimer += Time.deltaTime;
-            if (_lifeSpanTimer >= Lifespan)
+
+            if (_hasTraveled)
             {
-                _hasPopped = true;
+                _lifeSpanTimer += Time.deltaTime;
+                if (_lifeSpanTimer >= Lifespan)
+                {
+                    _hasPopped = true;
+                }
             }
         }
         else
@@ -163,6 +169,7 @@ public class Bubble : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, destination, time);
             yield return null;
         }
+        _hasTraveled = true;
         Rise = true;
         yield break;
     }
