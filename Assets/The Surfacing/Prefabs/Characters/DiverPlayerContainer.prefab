@@ -1022,6 +1022,8 @@ MonoBehaviour:
   <BubbleTravelDistance>k__BackingField: 2
   <BubbleTravelTime>k__BackingField: 3
   <MaxBubbleInstances>k__BackingField: 5
+  <ConsecutiveBubbleSpawning>k__BackingField: 0
+  <BubbleSpawnInterval>k__BackingField: 1
   <BubbleLifespan>k__BackingField: 3
   <BubbleRiseSpeed>k__BackingField: 0.7
   <BubbleScaleMultiplier>k__BackingField: 1
