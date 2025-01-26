@@ -78,7 +78,7 @@ public class BubbleGun : MonoBehaviour
             bubbleComponent.Lifespan = BubbleLifespan;
             bubbleComponent.RiseSpeed = BubbleRiseSpeed;
             _bubbles.Add(bubbleComponent);
-            bubbleComponent.PushBubble(destination, Time.deltaTime * BubbleTravelTime);
+            bubbleComponent.PushBubble(destination, BubbleTravelTime);
         }
     }
 

@@ -166,7 +166,7 @@ public class Bubble : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, destination) > AttachmentOffset)
         {
-            transform.position = Vector3.Lerp(transform.position, destination, time);
+            transform.position = Vector3.Lerp(transform.position, destination, Time.smoothDeltaTime * time);
             yield return null;
         }
         _hasTraveled = true;
