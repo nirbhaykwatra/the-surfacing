@@ -29,4 +29,9 @@ public class CharacterAnimations : MonoBehaviour
         // send isolated y-velocity
         Animator.SetFloat("VerticalVelocity", velocity.y);
     }
+
+    public void StartDancing()
+    {
+        Animator.SetTrigger("Dancing");
+    }
 }

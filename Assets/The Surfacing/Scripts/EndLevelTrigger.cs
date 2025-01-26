@@ -11,7 +11,6 @@ public class EndLevelTrigger : MonoBehaviour
         if(other.GetComponentInChildren<PlayerController>() != null)
         {
             GameEnd.Invoke();
-            Debug.Log("Player is here");
         }
     }
 }
