@@ -671,6 +671,7 @@ MonoBehaviour:
   <BubbleTravelDistance>k__BackingField: 2
   <BubbleTravelTime>k__BackingField: 3
   <MaxBubbleInstances>k__BackingField: 5
+  _bubbles: []
 --- !u!4 &2154477070037498299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a2f8ac7e0ad362c47b51e28357d009a1,
@@ -1367,11 +1368,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _footstepEvent:
     Guid:
-      Data1: -859862705
-      Data2: 1280738636
-      Data3: -1367347271
-      Data4: 113292409
-    Path: event:/SFX/Footstep
+      Data1: -1808198725
+      Data2: 1238833358
+      Data3: -645320781
+      Data4: -234596722
+    Path: event:/SFX/Pebbles
 --- !u!114 &8990766859768461283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,6 +1390,7 @@ MonoBehaviour:
   <BubbleTravelDistance>k__BackingField: 2
   <BubbleTravelTime>k__BackingField: 3
   <MaxBubbleInstances>k__BackingField: 5
+  _bubbles: []
 --- !u!4 &2124971933011451540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 13d7cf45d55cc3a4da1cfc0a4981d974,
