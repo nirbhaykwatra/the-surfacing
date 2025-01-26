@@ -2,7 +2,7 @@
     "name": "TemplateInputActions",
     "maps": [
         {
-            "name": "Player",
+            "name": "TempPlayer",
             "id": "e13374b9-65cf-43b6-bdfa-d650ddb6a687",
             "actions": [
                 {
@@ -253,7 +253,7 @@
             ]
         },
         {
-            "name": "UI",
+            "name": "TempUI",
             "id": "42b9c9b2-87ae-4c42-9524-c6dee19b314a",
             "actions": [
                 {
