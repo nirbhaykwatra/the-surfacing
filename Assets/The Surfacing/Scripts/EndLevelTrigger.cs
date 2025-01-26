@@ -8,7 +8,7 @@ public class EndLevelTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(TryGetComponent<PlayerController>(out PlayerController controller))
+        if(other.GetComponentInChildren<PlayerController>() != null)
         {
             GameEnd.Invoke();
             Debug.Log("Player is here");
