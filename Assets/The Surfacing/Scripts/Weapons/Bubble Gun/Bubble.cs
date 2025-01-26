@@ -21,6 +21,7 @@ public class Bubble : MonoBehaviour
     private bool _hasPopped;
     private bool _isAttached;
     private float _lifeSpanTimer;
+    private BubbleGun _bubbleGun;
     
     public UnityEvent OnDestroyed;
 
@@ -28,10 +29,16 @@ public class Bubble : MonoBehaviour
     {
         BubbleRb = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
+        _bubbleGun = FindAnyObjectByType<BubbleGun>();
         Rise = false;
         InCurrent = false;
         _hasPopped = false;
         _isAttached = false;
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void FixedUpdate()
@@ -60,6 +67,13 @@ public class Bubble : MonoBehaviour
         {
             _lifeSpanTimer = 0;
             _isAttached = false;
+            if (_bubbleGun != null)
+            {
+                if (_bubbleGun._bubbles.Contains(this))
+                {
+                    _bubbleGun._bubbles.Remove(this);
+                }
+            }
             OnDestroyed?.Invoke();
             Destroy(gameObject);
         }
