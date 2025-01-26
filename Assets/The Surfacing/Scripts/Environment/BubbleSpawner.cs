@@ -14,6 +14,9 @@ public class BubbleSpawner : MonoBehaviour
 
     [Header("Bubble Spawn Settings")]
     [field: SerializeField] private float BubbleRiseSpeed { get; set; } = 0.7f;
+    
+    [Header("Bubble Spawn Settings")]
+    [field: SerializeField] private float BubbleScaleMultiplier { get; set; } = 1f;
 
     private float _timer;
     private bool _canSpawn;
@@ -44,6 +47,7 @@ public class BubbleSpawner : MonoBehaviour
             {
                 if (bubbleObject.TryGetComponent(out Bubble bubble))
                 {
+                    bubble.gameObject.transform.localScale *= BubbleScaleMultiplier;
                     bubble.Lifespan = BubbleLifespan;
                     bubble.RiseSpeed = BubbleRiseSpeed;
                     bubble.Rise = true;
