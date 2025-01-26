@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: coral_mat
+  m_Name: CoralTree
   m_Shader: {fileID: -6465566751694194690, guid: f4638931901d6364bb803d166fab2d27,
     type: 3}
   m_Parent: {fileID: 0}
@@ -126,11 +126,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ce26e15ab71685940922fb84fe507b63, type: 3}
+        m_Texture: {fileID: 2800000, guid: cc6fdcb0d95d4cd419de3ca7b21983f2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: 6e4771a9ea04c2c41a143119580b483a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1bf63dbd43220c14cb12a2fea173ba72, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -138,7 +138,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: f24234eeae31b674885eb6278fb18c9a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 03431851ff7a9544195bd63c15086d14, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
@@ -392,7 +392,7 @@ Material:
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &3973393308062592815
+--- !u!114 &171526717538061361
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
