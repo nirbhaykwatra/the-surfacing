@@ -38,6 +38,7 @@ public class BubbleGun : MonoBehaviour
 
     public void CreateBubble()
     {
+        if (_bubbles.Count >= MaxBubbleInstances) return;
         Vector3 spawnPosition = (transform.forward * BubbleSpawnDistance) + (transform.position + Vector3.up);
         Vector3 destination = (transform.forward * (BubbleSpawnDistance + BubbleTravelDistance)) + (transform.position + Vector3.up);
 

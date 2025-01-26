@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8281609067919125418
+--- !u!114 &-7759052008983888680
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23,8 +23,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bubble
-  m_Shader: {fileID: -6465566751694194690, guid: cfbdf733a4cdee140be8118d85fc3bc8,
+  m_Name: WaterSurface
+  m_Shader: {fileID: -6465566751694194690, guid: d0679d09159c7bc4aa3d88a1c9713f9f,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -36,7 +36,6 @@ Material:
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _NORMALMAP_TANGENT_SPACE
-  - _RIM_LIGHT_DIRECTION_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -109,12 +108,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_38f16e6a955d47228ce4acf47c1d2757_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: fce7cf052397f8b4a93bac17087bce31, type: 3}
+    - _SampleTexture2D_3de31c7ef59849a9adb10cf05bb58d03_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 63d283be2860b7f4d848930221db27ec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_39c97c8f40614ad7a589d5113a776db7_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 5a8929682619d98408f00beb4f763426, type: 3}
+    - _SampleTexture2D_b6caf3f32c0a454d9af9ae388f49c4be_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 63ba0242e374e24438612eccc01ced00, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -143,10 +142,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _TransmittanceColorMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Triplanar_f0889a251a6f416796981855370acd00_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 5a8929682619d98408f00beb4f763426, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -179,7 +174,7 @@ Material:
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _Bubble_Edge_Distance: 0.56
+    - _Bubble_Edge_Distance: 0.91
     - _ClearCoatEnabled: 1
     - _CoatMask: 0
     - _ConservativeDepthOffsetEnable: 0
@@ -200,7 +195,6 @@ Material:
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 10
     - _DstBlend2: 10
-    - _Emission_Intensity: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -226,7 +220,6 @@ Material:
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _MaterialTypeMask: 2
-    - _Metal: 0
     - _Metallic: 0
     - _MetallicRemapMax: 1
     - _MetallicRemapMin: 0
@@ -241,18 +234,12 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _PerPixelSorting: 0
-    - _RIM_LIGHT_DIRECTION: 0
     - _RayTracing: 0
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 1
     - _RefractionModel: 3
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
-    - _Rim_Light_Camera_Relative_Pitch: 45
-    - _Rim_Light_Camera_Relative_Yaw: 45
-    - _Rim_Light_Falloff: 1
-    - _Rim_Light_Hardness: 0
-    - _Rim_Light_Strength: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -273,8 +260,6 @@ Material:
     - _SubsurfaceMask: 1
     - _SupportDecals: 0
     - _SurfaceType: 1
-    - _Surface_Tiling_X: 2
-    - _Surface_Tiling_Y: 5
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -292,8 +277,8 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _Wave_Speed: 10
-    - _Wave_Strength: 0.1
+    - _Wave_Speed: 5
+    - _Wave_Strength: 5
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
@@ -304,17 +289,13 @@ Material:
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Emission_Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Rim_Light_Color: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Transmission_Color: {r: 0, g: 0, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Transmittance_Color: {r: 0, g: 0, b: 0, a: 0}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
