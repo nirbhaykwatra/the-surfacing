@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class BubbleGun : MonoBehaviour
     [field: SerializeField] public float BubbleTravelTime { get; set; }
 
     [field: SerializeField] public int MaxBubbleInstances { get; set; } = 5;
+
+    [Header("Audio")]
+    [field: SerializeField] public EventReference _gunShoot;
     
     public List<Bubble> _bubbles;
     
@@ -36,6 +40,8 @@ public class BubbleGun : MonoBehaviour
     {
         Vector3 spawnPosition = (transform.forward * BubbleSpawnDistance) + (transform.position + Vector3.up);
         Vector3 destination = (transform.forward * (BubbleSpawnDistance + BubbleTravelDistance)) + (transform.position + Vector3.up);
+
+        AudioManager.instance.PlayOneShot(_gunShoot, transform.position);
         
         GameObject bubble = Instantiate(_bubble, spawnPosition, Quaternion.identity);
 

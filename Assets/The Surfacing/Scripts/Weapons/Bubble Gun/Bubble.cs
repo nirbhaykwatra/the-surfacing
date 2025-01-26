@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
@@ -15,6 +16,9 @@ public class Bubble : MonoBehaviour
     [field: SerializeField] private float AttachmentOffset { get; set; } = 0.05f;
     [field: SerializeField] public bool Rise { get; set; }
     [field: SerializeField] public bool InCurrent { get; set; }
+
+    [Header("Audio")]
+    [field: SerializeField] public EventReference _bubblePop;
     
     public Rigidbody BubbleRb;
     public BoxCollider _collider;
@@ -161,6 +165,11 @@ public class Bubble : MonoBehaviour
         }
         Rise = true;
         yield break;
+    }
+
+    public void BubblePop()
+    {
+        AudioManager.instance.PlayOneShot(_bubblePop, transform.position);
     }
 
     private void OnDrawGizmosSelected()
