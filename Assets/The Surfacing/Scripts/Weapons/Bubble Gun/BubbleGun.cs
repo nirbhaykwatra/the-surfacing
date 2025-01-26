@@ -10,8 +10,16 @@ public class BubbleGun : MonoBehaviour
     [field: SerializeField] public float BubbleSpawnDistance { get; set; }
     [field: SerializeField] public float BubbleTravelDistance { get; set; }
     [field: SerializeField] public float BubbleTravelTime { get; set; }
-
     [field: SerializeField] public int MaxBubbleInstances { get; set; } = 5;
+    
+    [Header("Bubble Spawn Settings")]
+    [field: SerializeField] private float BubbleLifespan { get; set; } = 3;
+
+    [Header("Bubble Spawn Settings")]
+    [field: SerializeField] private float BubbleRiseSpeed { get; set; } = 0.7f;
+    
+    [Header("Bubble Spawn Settings")]
+    [field: SerializeField] private float BubbleScaleMultiplier { get; set; } = 1f;
 
     [Header("Audio")]
     [field: SerializeField] public EventReference _gunShoot;
@@ -48,6 +56,9 @@ public class BubbleGun : MonoBehaviour
 
         if (bubble.TryGetComponent(out Bubble bubbleComponent))
         {
+            bubbleComponent.gameObject.transform.localScale *= BubbleScaleMultiplier;
+            bubbleComponent.Lifespan = BubbleLifespan;
+            bubbleComponent.RiseSpeed = BubbleRiseSpeed;
             _bubbles.Add(bubbleComponent);
             bubbleComponent.PushBubble(destination, Time.deltaTime * BubbleTravelTime);
         }
