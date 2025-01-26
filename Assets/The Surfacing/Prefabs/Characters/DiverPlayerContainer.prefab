@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3201951952096232979}
   - component: {fileID: 6697337528700467078}
   - component: {fileID: 4888884477730253041}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FreeLook Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476381638887944744}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000000074251942, y: -2.6811054e-19, z: -1.334493e-20, w: 1}
+  m_LocalRotation: {x: 0, y: 4.3655746e-11, z: -3.795294e-15, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -669,8 +669,15 @@ MonoBehaviour:
   _bubble: {fileID: 1437452151016944135, guid: 503f642ef7af02d4f872d20d157641b5, type: 3}
   <BubbleSpawnDistance>k__BackingField: 1
   <BubbleTravelDistance>k__BackingField: 2
-  <BubbleTravelTime>k__BackingField: 3
+  <BubbleTravelTime>k__BackingField: 2
   <MaxBubbleInstances>k__BackingField: 5
+  _gunShoot:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _bubbles: []
 --- !u!4 &2154477070037498299 stripped
 Transform:
@@ -1249,7 +1256,7 @@ MonoBehaviour:
   <ControlRotation>k__BackingField: 1
   <Fix3DSpriteRotation>k__BackingField: 0
   <ParentToSurface>k__BackingField: 0
-  <Gravity>k__BackingField: -20
+  <Gravity>k__BackingField: -10
   <JumpHeight>k__BackingField: 2.25
   <AirControl>k__BackingField: 0.5
   <AirTurning>k__BackingField: 1
@@ -1268,7 +1275,19 @@ MonoBehaviour:
       m_Calls: []
   OnFootstep:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2427857384845877914}
+        m_TargetAssemblyTypeName: FMODExtensions.FMODFootsteps, FMODExtensions
+        m_MethodName: PlayFootstep
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <StepHeight>k__BackingField: 0.3
   <StepHeightAllowance>k__BackingField: 0.1
   <StepHeightForwardOffset>k__BackingField: 0.05
@@ -1368,11 +1387,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _footstepEvent:
     Guid:
-      Data1: -1808198725
-      Data2: 1238833358
-      Data3: -645320781
-      Data4: -234596722
-    Path: event:/SFX/Pebbles
+      Data1: -859862705
+      Data2: 1280738636
+      Data3: -1367347271
+      Data4: 113292409
+    Path: event:/SFX/Footstep
 --- !u!114 &8990766859768461283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1390,6 +1409,13 @@ MonoBehaviour:
   <BubbleTravelDistance>k__BackingField: 2
   <BubbleTravelTime>k__BackingField: 3
   <MaxBubbleInstances>k__BackingField: 5
+  _gunShoot:
+    Guid:
+      Data1: -115402538
+      Data2: 1126462473
+      Data3: -617912167
+      Data4: -1389618098
+    Path: event:/SFX/BubbleGun
   _bubbles: []
 --- !u!4 &2124971933011451540 stripped
 Transform:

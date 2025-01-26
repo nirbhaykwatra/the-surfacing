@@ -107,11 +107,30 @@ MonoBehaviour:
   <AttachmentOffset>k__BackingField: 0.05
   <Rise>k__BackingField: 0
   <InCurrent>k__BackingField: 0
+  _bubblePop:
+    Guid:
+      Data1: -161017024
+      Data2: 1131142220
+      Data3: -780319059
+      Data4: -321020348
+    Path: event:/SFX/BubblePop
   BubbleRb: {fileID: 0}
   _collider: {fileID: 0}
   OnDestroyed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6718798969085665290}
+        m_TargetAssemblyTypeName: Bubble, Assembly-CSharp
+        m_MethodName: BubblePop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &2316871265444878578
 BoxCollider:
   m_ObjectHideFlags: 0
