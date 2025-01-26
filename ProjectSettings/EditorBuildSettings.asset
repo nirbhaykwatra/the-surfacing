@@ -5,11 +5,17 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Demo/Scenes/Menu.unity
     guid: 845efb974a677a5469d40ae22c2af6ac
-  - enabled: 1
+  - enabled: 0
     path: Assets/Demo/Scenes/3DGeneral.unity
     guid: fa65b82cf01e3ac419949ae83b762bdf
+  - enabled: 1
+    path: Assets/The Surfacing/Scenes/Menus/MainMenu.unity
+    guid: b6992787b7d1a9c418a499f35d26cd76
+  - enabled: 1
+    path: Assets/The Surfacing/Scenes/Gameplay/Level1.unity
+    guid: ae7e9a4b247cac0499bba2a1d6a84ba2
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
