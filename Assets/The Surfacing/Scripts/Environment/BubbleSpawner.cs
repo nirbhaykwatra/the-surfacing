@@ -6,6 +6,8 @@ public class BubbleSpawner : MonoBehaviour
     public GameObject bubblePrefab;
     
     [field: SerializeField] private float SpawnInterval { get; set; }
+    
+    [field: SerializeField] private float SpawnDelay { get; set; }
 
     [Header("Bubble Spawn Settings")]
     [field: SerializeField] private float BubbleLifespan { get; set; } = 10;
@@ -13,17 +15,28 @@ public class BubbleSpawner : MonoBehaviour
     [Header("Bubble Spawn Settings")]
     [field: SerializeField] private float BubbleRiseSpeed { get; set; } = 0.7f;
 
-    private float timer;
+    private float _timer;
+    private bool _canSpawn;
 
     private void Awake()
     {
-        timer = 0;
+        _timer = 0;
+        _canSpawn = false;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= SpawnInterval)
+        _timer += Time.deltaTime;
+
+        if (!_canSpawn)
+        {
+            if (_timer >= SpawnDelay)
+            {
+                _canSpawn = true;
+            }
+        }
+
+        if (_timer >= SpawnInterval && _canSpawn)
         {
             GameObject bubbleObject = Instantiate(bubblePrefab, transform.position, Quaternion.identity);
 
@@ -36,7 +49,7 @@ public class BubbleSpawner : MonoBehaviour
                     bubble.Rise = true;
                 }
             }
-            timer = 0;
+            _timer = 0;
         }
     }
     
