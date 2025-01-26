@@ -5,7 +5,7 @@
 			<value>BubblePop</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{5f0e255a-8f4f-42ca-9226-c7d4dbd1b513}</destination>
@@ -94,9 +94,11 @@
 	<object class="MixerBusEffectChain" id="{433048ae-0356-474b-9eca-2fa2ed301900}">
 		<relationship name="effects">
 			<destination>{15579abd-5f18-4a23-a021-512d5b52b3ce}</destination>
+			<destination>{406716f4-c4a4-4e97-aa3f-551f23c6ce38}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{9ef548e3-071c-43d5-9ce3-74b79369f398}" />
 	<object class="MixerBusFader" id="{a683e90f-a13a-48b9-a2c6-0690545db4d6}" />
 	<object class="MixerBusFader" id="{15579abd-5f18-4a23-a021-512d5b52b3ce}" />
+	<object class="SpatialiserEffect" id="{406716f4-c4a4-4e97-aa3f-551f23c6ce38}" />
 </objects>
