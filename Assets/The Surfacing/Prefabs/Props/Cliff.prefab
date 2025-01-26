@@ -161,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4417344872001614280}
   - component: {fileID: 7112991395089623498}
+  - component: {fileID: 8185456621661686868}
   m_Layer: 0
   m_Name: ucx_cliff_01_collider
   m_TagString: Untagged
@@ -205,3 +206,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5224454507197955546, guid: 7bb7eb5867fe12847a7fca428bd42e4c, type: 3}
+--- !u!114 &8185456621661686868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294347539569472002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f212382104762543ba819be6e9a604b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _surfaceMaterial: {fileID: 11400000, guid: e3d5b2b52d8060e4887c0463b44d0857, type: 2}

@@ -75,6 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1068461439187091011}
   - component: {fileID: 1082397581911049711}
+  - component: {fileID: 2190822908416901266}
   m_Layer: 0
   m_Name: ucx_cave_01
   m_TagString: Untagged
@@ -119,6 +120,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4334824889766178812, guid: dc94d7ce07cdc08499f6db7656d1a32d, type: 3}
+--- !u!114 &2190822908416901266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5605597513996564301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f212382104762543ba819be6e9a604b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _surfaceMaterial: {fileID: 11400000, guid: e3d5b2b52d8060e4887c0463b44d0857, type: 2}
 --- !u!1 &6352621359603413783
 GameObject:
   m_ObjectHideFlags: 0

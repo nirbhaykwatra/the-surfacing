@@ -16,7 +16,7 @@
 			<value>2</value>
 		</property>
 		<property name="maximum">
-			<value>5</value>
+			<value>6</value>
 		</property>
 		<property name="enumerationLabels">
 			<value>Default</value>
@@ -24,6 +24,7 @@
 			<value>SolidWood</value>
 			<value>WetSand</value>
 			<value>Pebbles</value>
+			<value>Value A</value>
 		</property>
 		<property name="initialValue">
 			<value>2</value>

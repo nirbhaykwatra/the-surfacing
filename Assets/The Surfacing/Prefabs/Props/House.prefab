@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2458924631281803324}
@@ -161,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4295508006664891396}
   - component: {fileID: 774140805375135128}
+  - component: {fileID: 873382429967461293}
   m_Layer: 0
   m_Name: ucx_house_01_collider
   m_TagString: Untagged
@@ -205,3 +206,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2587221574812949466, guid: 78b3597a65f7aa647ab742989ea8ed22, type: 3}
+--- !u!114 &873382429967461293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7659633536251602869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f212382104762543ba819be6e9a604b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _surfaceMaterial: {fileID: 11400000, guid: b54597f1ed1da754b8790b147cde8f88, type: 2}
