@@ -7,23 +7,19 @@ The Surfacing is a 3D third-person over the shoulder platformer that takes place
 ### Gameplay Controls  
 Action               | Keyboard Control  | Gamepad Control
 ---                  |---                |---
-Move                 | WASD              | Stick R
-Aim                  | Mouse Look        | Stick L
-Attack               | Mouse L           | Trigger R
-Block                | Mouse R           | Trigger L
+Move                 | WASD              | Stick L
+Look                  | Mouse Look        | Stick R
+Shoot Bubble               | Mouse L           | Trigger R
+Jump                | Space           | Face Button South
 
 ### Debug Controls  
-Action               | Keyboard Control
----                  |---          
-Debug Menu           | F1              
-Invincibility        | F2               
-Unlimited Ammo       | F3                
-Cycle Checkpoints    | F4                
-Respawn Enemies      | F5                
+Action                          | Keyboard Control | Gamepad Control
+---                             |---               |---
+Increase Checkpoint Integer     | Up Arrow               |  D-Pad Up          
+Decrease Checkpoint Integer     | Down Arrow               |  D-Pad Down              
 
 ### Team  
-Grigorii Iatskov - Project Manager, Level Design   
-Nirbhay Kwatra - Programming  
-Harshad Palsule - 3D/Environment Art  
-Gabriela Braga - Art, Audio, Documentation
+Grigorii Iatskov - Project Manager, Level Design, Game Design, Audio  
+Nirbhay Kwatra - Programming, Technical Art, Game Design  
+Harshad Palsule - 3D/Environment Art 
 
