@@ -278,7 +278,7 @@ Material:
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _Wave_Speed: 5
-    - _Wave_Strength: 5
+    - _Wave_Strength: 2
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
