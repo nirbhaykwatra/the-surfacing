@@ -19,8 +19,7 @@ public class WaterCurrentVolume : MonoBehaviour
     
     private void Awake()
     {
-        _collider = GetComponent<BoxCollider>();
-        _collider.isTrigger = true;
+        
     }
     
     private void Update()
@@ -30,52 +29,49 @@ public class WaterCurrentVolume : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+        if (other.TryGetComponent<Bubble>(out Bubble bubble))
         {
-            if (other.TryGetComponent<Bubble>(out Bubble bubble))
-            {
-                bubble.InCurrent = true;
-            }
+            
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+        if (other.TryGetComponent<Bubble>(out Bubble bubble))
         {
-            if (other.TryGetComponent<Bubble>(out Bubble bubble))
+            if (bubble.Rigidbody.isKinematic)
             {
-                switch (_axis)
+                bubble.gameObject.transform.position += new Vector3(0f, Time.fixedDeltaTime * bubble.RiseSpeed, 0f);
+                //bubble.Rigidbody.MovePosition(nextPosition);
+                if (Mathf.Abs(bubble.gameObject.transform.position.y - transform.position.y) < 0.1f)
                 {
-                    case WaterCurrentAxis.Right:
-                        bubble.gameObject.transform.position += 
-                            (Vector3.right + new Vector3(0f, Buoyancy, 0f)) * (Time.deltaTime * WaterCurrentStrength);
-                        break;
-                    case WaterCurrentAxis.Up:
-                        bubble.gameObject.transform.position += 
-                            Vector3.up * (Time.deltaTime * WaterCurrentStrength);
-                        break;
-                    case WaterCurrentAxis.Left:
-                        bubble.gameObject.transform.position += 
-                            (Vector3.left + new Vector3(0f, Buoyancy, 0f)) * (Time.deltaTime * WaterCurrentStrength);
-                        break;
+                    Vector3 sidePosition = bubble.gameObject.transform.position + new Vector3(0f, 0f, Time.fixedDeltaTime * WaterCurrentStrength);
+                    bubble.Rigidbody.MovePosition(sidePosition);
                 }
             }
+            else
+            {
+                if (Mathf.Abs(bubble.gameObject.transform.position.y - transform.position.y) < 0.1f)
+                {
+                    bubble.InCurrent = true;
+                    bubble.Rigidbody.AddForce(new Vector3(0f, Buoyancy, WaterCurrentStrength), ForceMode.Force);
+                
+                }
+            }
+            
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+        if (other.TryGetComponent<Bubble>(out Bubble bubble))
         {
-            if (other.TryGetComponent<Bubble>(out Bubble bubble))
-            {
-                bubble.InCurrent = false;
-            }
+            bubble.HasLeftCurrent = true;
+            bubble.InCurrent = false;
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, transform.lossyScale);
