@@ -8,12 +8,17 @@ using UnityEngine.Serialization;
 
 public class Bubble : MonoBehaviour
 {
-    [field: SerializeField] public float Lifespan { get; set; } = 10f;
-    [field: SerializeField] public float RiseSpeed { get; set; } = 0.7f;
-    [Tooltip("How fast a bubble attaches to a liftable object")]
-    [field: SerializeField] private float AttachmentSpeed { get; set; } = 0.8f;
-    [Tooltip("How far a bubble is when it attaches to a liftable object")]
-    [field: SerializeField] private float AttachmentOffset { get; set; } = 0.05f;
+    
+    [Header("Bubble Attributes")]
+    [field: SerializeField] public float Lifespan { get; set; }
+    
+    [Header("Bubble Attributes")]
+    [field: SerializeField] public float Buoyancy { get; set; }
+
+    [Header("Bubble Attributes")]
+    [field: SerializeField]
+    public float BubbleScaleMultiplier { get; set; } = 1f;
+    
     [field: SerializeField] public bool Rise { get; set; }
     [field: SerializeField] public bool InCurrent { get; set; }
 
@@ -25,13 +30,14 @@ public class Bubble : MonoBehaviour
     private bool _hasPopped;
     private bool _isAttached;
     private bool _hasTraveled;
-    private bool _isKinematic;
     private bool _hasLeftCurrent;
     private float _lifeSpanTimer;
     private BubbleGun _bubbleGun;
     private Vector3 _previousPosition = new Vector3();
+    private Vector3 _currentPosition = new Vector3();
     private Vector3 _kinematicVelocity = new Vector3();
     
+    public BubbleSettings _ctx;
     public UnityEvent OnDestroyed;
     
     public bool HasLeftCurrent { get => _hasLeftCurrent; set => _hasLeftCurrent = value; }
@@ -43,18 +49,16 @@ public class Bubble : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
         _bubbleGun = FindAnyObjectByType<BubbleGun>();
+        if (Lifespan == 0) Lifespan = _ctx.Lifespan;
+        if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _ctx.BubbleScaleMultiplier;
+        if (Buoyancy == 0) Buoyancy = _ctx.Buoyancy;
+        transform.localScale *= BubbleScaleMultiplier;
         Rise = false;
         InCurrent = false;
         _hasPopped = false;
         _isAttached = false;
         _hasTraveled = false;
-        _isKinematic = false;
         _hasLeftCurrent = false;
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -65,13 +69,21 @@ public class Bubble : MonoBehaviour
             {
                 Rise = false;
 
-                if (_isKinematic)
+                if (Rigidbody.isKinematic)
                 {
-                    
+                    Debug.Log($"_hasLeftCurrent: {_hasLeftCurrent}");
+                    /*Vector3 targetPosition = transform.position + new Vector3(0f, 0f, 5f);
+                    transform.position = Vector3.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * 0.01f);
+
+                    /*if (Vector3.Distance(transform.position, targetPosition) < 0.05f)
+                    {
+                        Rise = true;
+                        _hasLeftCurrent = false;
+                    }*/
                 }
                 else
                 {
-                    Rigidbody.linearVelocity = Vector3.Lerp(Rigidbody.linearVelocity, Vector3.zero, Time.fixedDeltaTime);
+                    Rigidbody.linearVelocity = Vector3.Lerp(Rigidbody.linearVelocity, Vector3.zero, Time.fixedDeltaTime * _ctx.TimeToOffset);
 
                     if (Rigidbody.linearVelocity.magnitude < 0.05f)
                     {
@@ -83,10 +95,9 @@ public class Bubble : MonoBehaviour
             
             if (!_hasPopped && Rise)
             {
-                //Debug.Log(_isKinematic);
-                Vector3 nextPosition = transform.position + new Vector3(0f, Time.fixedDeltaTime * RiseSpeed, 0f);
+                Vector3 nextPosition = transform.position + new Vector3(0f, Time.fixedDeltaTime * Buoyancy, 0f);
 
-                if (_isKinematic)
+                if (Rigidbody.isKinematic)
                 {
                     Rigidbody.MovePosition(nextPosition);
                 }
@@ -94,14 +105,13 @@ public class Bubble : MonoBehaviour
                 {
                     Rigidbody.Move(nextPosition, Quaternion.identity);
                 }
-                
-                //transform.position += Vector3.up * (Time.fixedDeltaTime * RiseSpeed);
             }
         }
     }
 
     private void Update()
     {
+        _currentPosition = transform.position;
         if (!_hasPopped)
         {
             if (InCurrent)
@@ -116,6 +126,11 @@ public class Bubble : MonoBehaviour
                 {
                     _hasPopped = true;
                 }
+            }
+
+            if (Rigidbody.isKinematic)
+            {
+                _kinematicVelocity = (_currentPosition - _previousPosition) / Time.deltaTime;
             }
         }
         else
@@ -134,70 +149,72 @@ public class Bubble : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        _previousPosition = _currentPosition;
+    }
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Character") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (collision.gameObject.TryGetComponent(out CharacterMovement3D character))
         {
-            _isKinematic = true;
             Rigidbody.isKinematic = true;
-            _previousPosition = transform.position;
             return;
         }
-        else
+        
+        if (collision.gameObject.TryGetComponent(out Liftable liftable))
+        {
+            _collider.isTrigger = true;
+            return;
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Abrasive"))
         {
             _hasPopped = true;
         }
-        
-    }
-
-    private void OnCollisionStay(Collision other)
-    {
-        
-        if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
-        {
-            _kinematicVelocity = (transform.position - _previousPosition) / Time.fixedDeltaTime;
-            //BubbleRb.AddForce(new Vector3(0f, 13f, 0f), ForceMode.Force);
-            _previousPosition = transform.position;
-        }
-        
     }
 
     private void OnCollisionExit(Collision other)
     {
-        _isKinematic = false;
         Rigidbody.isKinematic = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.TryGetComponent(out Liftable liftable))
+        {
+            StartCoroutine(GrowBubble(liftable.transform.lossyScale.magnitude));
+            liftable.Bubble = this;
+        }
+       
+        if (other.gameObject.layer == LayerMask.NameToLayer("Abrasive"))
+        {
+            _hasPopped = true;
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Current"))
+        {
+           
+        }
+
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Liftable"))
+        if (other.gameObject.TryGetComponent(out Liftable liftable))
         {
-            if (other.gameObject.TryGetComponent(out Liftable liftable))
-            {
-                //if (liftable._bubble != null) return;
-
-                if (Vector3.Distance(transform.position, liftable.gameObject.transform.position) > AttachmentOffset)
-                {
-                    //liftable.transform.position = Vector3.Lerp(liftable.transform.position, transform.position, AttachmentSpeed * Time.deltaTime);
-                }
-                else
-                {
-                    _isAttached = true;
-                }
-                
-                if (!_hasPopped && _isAttached)
-                {
-                    transform.position += Vector3.up * (Time.fixedDeltaTime * RiseSpeed);
-                    liftable.gameObject.transform.position = transform.position;
-                }
-            }
+            liftable.Bubble = null;
+            _collider.isTrigger = false;
+        }
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Current"))
+        {
+            
         }
     }
+    
+    
 
     public void PushBubble(Vector3 destination, float time)
     {
@@ -206,9 +223,9 @@ public class Bubble : MonoBehaviour
 
     private IEnumerator MoveBubble(Vector3 destination, float time)
     {
-        while (Vector3.Distance(transform.position, destination) > AttachmentOffset)
+        while (Vector3.Distance(transform.position, destination) > _ctx.AttachmentOffset)
         {
-            if (_isKinematic)
+            if (Rigidbody.isKinematic)
             {
                 Rigidbody.MovePosition(Vector3.Lerp(transform.position, destination, time));
             }
@@ -221,6 +238,15 @@ public class Bubble : MonoBehaviour
         _hasTraveled = true;
         Rise = true;
         yield break;
+    }
+
+    private IEnumerator GrowBubble(float liftableScale)
+    {
+        while (transform.lossyScale.magnitude < liftableScale * 2)
+        {
+            transform.localScale += Vector3.one * (_ctx.BubbleGrowthTime * Time.deltaTime);
+            yield return null;
+        }
     }
 
     public void BubblePop()

@@ -3,29 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BubbleGun : MonoBehaviour
 {
     [SerializeField] private GameObject _bubble;
     
-    [field: SerializeField] public float BubbleSpawnDistance { get; set; }
-    [field: SerializeField] public float BubbleTravelDistance { get; set; }
-    [field: SerializeField] public float BubbleTravelTime { get; set; }
+    [Header("Spawn Settings")]
+    [field: SerializeField] public float SpawnDistance { get; set; }
+    
+    [Header("Spawn Settings")]
+    [field: SerializeField] public float OffsetDistance { get; set; }
+    
+    [field: SerializeField] private float Cooldown { get; set; } = 1f;
     [field: SerializeField] public int MaxBubbleInstances { get; set; } = 5;
     
     [Tooltip("If false, bubbles cannot be created until all player-created bubbles have popped.")]
     [field: SerializeField] public bool ConsecutiveBubbleSpawning { get; set; }
     
-    [field: SerializeField] private float BubbleSpawnInterval { get; set; } = 1f;
+    [Header("Bubble Attributes")]
+    [field: SerializeField] public float Lifespan { get; set; }
     
+    [Header("Bubble Attributes")]
+    [field: SerializeField] public float Buoyancy { get; set; }
     
-    [Header("Bubble Spawn Settings")]
-    [field: SerializeField] private float BubbleLifespan { get; set; } = 3;
-
-    [Header("Bubble Spawn Settings")]
-    [field: SerializeField] private float BubbleRiseSpeed { get; set; } = 0.7f;
-    
-    [Header("Bubble Spawn Settings")]
-    [field: SerializeField] private float BubbleScaleMultiplier { get; set; } = 1f;
+    [Header("Bubble Attributes")]
+    [field: SerializeField] public float BubbleScaleMultiplier { get; set; }
 
     [Header("Audio")]
     [field: SerializeField] public EventReference _gunShoot;
@@ -34,9 +36,16 @@ public class BubbleGun : MonoBehaviour
     private bool _canShoot;
     private float _shootTimer;
     
+    public BubbleSettings _ctx;
+    
     private void Awake()
     {
         _bubbles = new List<Bubble>();
+        
+        if (Lifespan == 0) Lifespan = _ctx.Lifespan;
+        if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _ctx.BubbleScaleMultiplier;
+        if (Buoyancy == 0) Buoyancy = _ctx.Buoyancy;
+        
         _canShoot = true;
         _shootTimer = 0;
     }
@@ -84,8 +93,8 @@ public class BubbleGun : MonoBehaviour
 
     private void SpawnBubble()
     {
-        Vector3 spawnPosition = (transform.forward * BubbleSpawnDistance) + (transform.position + Vector3.up);
-        Vector3 destination = (transform.forward * (BubbleSpawnDistance + BubbleTravelDistance)) + (transform.position + Vector3.up);
+        Vector3 spawnPosition = (transform.forward * SpawnDistance) + (transform.position + Vector3.up);
+        Vector3 destination = (transform.forward * (SpawnDistance + OffsetDistance)) + (transform.position + Vector3.up);
 
         AudioManager.instance.PlayOneShot(_gunShoot, transform.position);
         
@@ -93,27 +102,29 @@ public class BubbleGun : MonoBehaviour
 
         if (bubble.TryGetComponent(out Bubble bubbleComponent))
         {
-            bubbleComponent.gameObject.transform.localScale *= BubbleScaleMultiplier;
-            bubbleComponent.Lifespan = BubbleLifespan;
-            bubbleComponent.RiseSpeed = BubbleRiseSpeed;
+            bubbleComponent.BubbleScaleMultiplier = BubbleScaleMultiplier;
+            bubbleComponent.Lifespan = Lifespan;
+            bubbleComponent.Buoyancy = Buoyancy;
             _bubbles.Add(bubbleComponent);
-            bubbleComponent.PushBubble(destination, Time.deltaTime * BubbleTravelTime);
+            bubbleComponent.PushBubble(destination, Time.deltaTime * _ctx.TimeToOffset);
         }
     }
 
     private IEnumerator WaitForBubbles()
     {
         _canShoot = false;
-        yield return new WaitForSeconds(BubbleSpawnInterval);
+        yield return new WaitForSeconds(Cooldown);
         _canShoot = true;
     }
     
     private void OnDrawGizmosSelected()
     {
-        Vector3 spawnPosition = (transform.forward * BubbleSpawnDistance) + (transform.position + Vector3.up);
+        Vector3 spawnPosition = (transform.forward * SpawnDistance) + (transform.position + Vector3.up);
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(spawnPosition, (transform.forward * (SpawnDistance + OffsetDistance)) + (transform.position + Vector3.up));
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(spawnPosition,0.2f);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere((transform.forward * (BubbleSpawnDistance + BubbleTravelDistance)) + (transform.position + Vector3.up), 0.3f);
+        Gizmos.DrawWireSphere((transform.forward * (SpawnDistance + OffsetDistance)) + (transform.position + Vector3.up), 0.3f);
     }
 }

@@ -1018,14 +1018,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bubble: {fileID: 1437452151016944135, guid: 503f642ef7af02d4f872d20d157641b5, type: 3}
-  <BubbleSpawnDistance>k__BackingField: 1
-  <BubbleTravelDistance>k__BackingField: 2
-  <BubbleTravelTime>k__BackingField: 3
+  <SpawnDistance>k__BackingField: 0
+  <OffsetDistance>k__BackingField: 0
+  <Cooldown>k__BackingField: 1
   <MaxBubbleInstances>k__BackingField: 5
   <ConsecutiveBubbleSpawning>k__BackingField: 0
-  <BubbleSpawnInterval>k__BackingField: 1
-  <BubbleLifespan>k__BackingField: 3
-  <BubbleRiseSpeed>k__BackingField: 0.7
+  <Lifespan>k__BackingField: 0
+  <Buoyancy>k__BackingField: 0
   <BubbleScaleMultiplier>k__BackingField: 1
   _gunShoot:
     Guid:
@@ -1035,6 +1034,7 @@ MonoBehaviour:
       Data4: -1389618098
     Path: event:/SFX/BubbleGun
   _bubbles: []
+  _ctx: {fileID: 0}
 --- !u!4 &2124971933011451540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 13d7cf45d55cc3a4da1cfc0a4981d974,

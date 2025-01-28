@@ -6,29 +6,33 @@ using UnityEngine;
 public class Liftable : MonoBehaviour
 {
     public bool BubbleAttached { get; set; }
-    
-    private Rigidbody _rb;
-    public Rigidbody LiftableRb { get { return _rb; } set { _rb = value; } }
-    public Bubble _bubble;
-    public BoxCollider _boxCollider;
+    public Rigidbody Rigidbody { get; set; }
+    public Bubble Bubble;
+    public BoxCollider Collider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
-        _boxCollider = GetComponent<BoxCollider>();
+        Rigidbody = GetComponent<Rigidbody>();
+        Collider = GetComponent<BoxCollider>();
         BubbleAttached = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (Bubble)
+        {
+            Rigidbody.useGravity = false;
+            Rigidbody.Move(Bubble.gameObject.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Rigidbody.useGravity = true;
+        }
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (_bubble == null)
-        {
-            BubbleAttached = false;
-            _rb.isKinematic = false;
-            _rb.useGravity = true;
-            transform.parent = null;
-            _boxCollider.isTrigger = false;
-        }
+        
     }
 }
