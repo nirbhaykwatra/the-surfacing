@@ -10,15 +10,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Abrasive
   - Water
   - UI
-  - Bubble
-  - Liftable
+  - Current
+  - 
   - Character
-  - FPSForeground
-  - Wall
-  - BubbleSafe
+  - 
+  - 
+  - 
   - PostProcessing
   - 
   - 
