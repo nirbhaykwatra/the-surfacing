@@ -43,28 +43,47 @@ public class BubbleGun : MonoBehaviour
     
     private void Update()
     {
-        if (_bubbles.Count - 1 >= MaxBubbleInstances)
+        if (MaxBubbleInstances != 0)
         {
-            if (_bubbles[0] != null)
+            if (_bubbles.Count - 1 >= MaxBubbleInstances)
             {
-                Destroy(_bubbles[0].gameObject);
-                _bubbles.RemoveAt(0);
+                if (_bubbles[0] != null)
+                {
+                    Destroy(_bubbles[0].gameObject);
+                    _bubbles.RemoveAt(0);
+                }
             }
+        }
+        else
+        {
+            return;
         }
     }
 
     public void CreateBubble()
     {
-        if (ConsecutiveBubbleSpawning)
+        if (MaxBubbleInstances != 0)
         {
-            if (_bubbles.Count >= MaxBubbleInstances) return;
+            if (ConsecutiveBubbleSpawning)
+            {
+                if (_bubbles.Count >= MaxBubbleInstances) return;
+            }
+            else
+            {
+                if (_bubbles.Count >= MaxBubbleInstances) StartCoroutine(WaitForBubbles());
+            }
+            if (!_canShoot) return;
+            
+            SpawnBubble();
         }
         else
         {
-            if (_bubbles.Count >= MaxBubbleInstances) StartCoroutine(WaitForBubbles());
+            SpawnBubble();
         }
-        if (!_canShoot) return;
-        
+    }
+
+    private void SpawnBubble()
+    {
         Vector3 spawnPosition = (transform.forward * BubbleSpawnDistance) + (transform.position + Vector3.up);
         Vector3 destination = (transform.forward * (BubbleSpawnDistance + BubbleTravelDistance)) + (transform.position + Vector3.up);
 
