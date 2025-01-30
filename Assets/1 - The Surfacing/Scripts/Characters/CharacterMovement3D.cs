@@ -199,6 +199,8 @@ public class CharacterMovement3D : CharacterMovementBase
             speed = Speed * (1f + noise * SpeedVariation);
         }
 
+        // TODO: Create a satisfying and precise jump, implementing things like higher jump on longer button press,
+        //  creating a snappy feeling. Refer to Mario Odyssey and Astro Bot.
         // calculates desirection movement velocity
         Vector3 targetVelocity = forward * (speed * MoveSpeedMultiplier);
         if (!CanMove) targetVelocity = Vector3.zero;
