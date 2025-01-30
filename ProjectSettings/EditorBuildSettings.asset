@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/The Surfacing/Scenes/Menus/MenuLevel.unity
+    path: Assets/1 - The Surfacing/Scenes/Menus/MenuLevel.unity
     guid: 9d46fcd4efc0c604ca978ac11b6f8bfa
   - enabled: 1
-    path: Assets/The Surfacing/Scenes/Gameplay/Level1.unity
+    path: Assets/1 - The Surfacing/Scenes/Gameplay/Level1.unity
     guid: ae7e9a4b247cac0499bba2a1d6a84ba2
   - enabled: 1
-    path: Assets/The Surfacing/Scenes/Gyms/mechanics-gym.unity
+    path: Assets/1 - The Surfacing/Scenes/Gyms/mechanics-gym.unity
     guid: 44d7679caabc386459a9b94745afac89
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: fd80b8c7c61dce849b1d1c20ddf762f4,

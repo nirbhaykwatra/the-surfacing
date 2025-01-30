@@ -5,26 +5,34 @@ public class BubbleSpawner : MonoBehaviour
 {
     public GameObject bubblePrefab;
     
+    [Header("Spawn Settings")]
     [field: SerializeField] private float SpawnInterval { get; set; }
     
+    [Header("Spawn Settings")]
     [field: SerializeField] private float SpawnDelay { get; set; }
-
-    [Header("Bubble Spawn Settings")]
-    [field: SerializeField] private float BubbleLifespan { get; set; } = 10;
-
-    [Header("Bubble Spawn Settings")]
-    [field: SerializeField] private float BubbleRiseSpeed { get; set; } = 0.7f;
     
-    [Header("Bubble Spawn Settings")]
-    [field: SerializeField] private float BubbleScaleMultiplier { get; set; } = 1f;
+    [Header("Bubble Attributes")]
+    [field: SerializeField] public float Lifespan { get; set; }
+    
+    [Header("Bubble Attributes")]
+    [field: SerializeField] public float Buoyancy { get; set; }
+    
+    [Header("Bubble Attributes")]
+    [field: SerializeField] public float BubbleScaleMultiplier { get; set; }
 
     private float _timer;
     private bool _canSpawn;
+    
+    public BubbleSettings _ctx;
 
     private void Awake()
     {
         _timer = 0;
         _canSpawn = false;
+        
+        if (Lifespan == 0) Lifespan = _ctx.Lifespan;
+        if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _ctx.BubbleScaleMultiplier;
+        if (Buoyancy == 0) Buoyancy = _ctx.Buoyancy;
     }
 
     private void Update()
@@ -47,9 +55,9 @@ public class BubbleSpawner : MonoBehaviour
             {
                 if (bubbleObject.TryGetComponent(out Bubble bubble))
                 {
-                    bubble.gameObject.transform.localScale *= BubbleScaleMultiplier;
-                    bubble.Lifespan = BubbleLifespan;
-                    bubble.RiseSpeed = BubbleRiseSpeed;
+                    bubble.Lifespan = Lifespan;
+                    bubble.Buoyancy = Buoyancy;
+                    bubble.BubbleScaleMultiplier = BubbleScaleMultiplier;
                     bubble.Rise = true;
                 }
             }

@@ -199,6 +199,8 @@ public class CharacterMovement3D : CharacterMovementBase
             speed = Speed * (1f + noise * SpeedVariation);
         }
 
+        // TODO: Create a satisfying and precise jump, implementing things like higher jump on longer button press,
+        //  creating a snappy feeling. Refer to Mario Odyssey and Astro Bot.
         // calculates desirection movement velocity
         Vector3 targetVelocity = forward * (speed * MoveSpeedMultiplier);
         if (!CanMove) targetVelocity = Vector3.zero;
@@ -252,7 +254,20 @@ public class CharacterMovement3D : CharacterMovementBase
         if (!hit) return false;
 
         // gets velocity of surface underneath character if applicable
-        if (hitInfo.rigidbody != null) SurfaceVelocity = hitInfo.rigidbody.linearVelocity;
+        if (hitInfo.rigidbody != null)
+        {
+            if (hitInfo.rigidbody.gameObject.TryGetComponent(out Bubble bubble))
+            {
+                SurfaceVelocity = bubble.Velocity;
+            }
+            else
+            {
+                SurfaceVelocity = hitInfo.rigidbody.linearVelocity;
+            }
+        }
+
+        // if surface underneath is a bubble, get bubble's velocity. Bubbles are kinematic rigidbodies and will not have a linearVelocity property.
+        
         
         // test angle between character up and ground, angles above _maxSlopeAngle are invalid
         bool angleValid = Vector3.Angle(transform.up, hitInfo.normal) < MaxSlopeAngle;
