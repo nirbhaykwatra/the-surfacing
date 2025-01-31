@@ -184,7 +184,7 @@ public class Bubble : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Liftable liftable))
         {
-            StartCoroutine(GrowBubble(liftable.transform.lossyScale.magnitude));
+            StartCoroutine(GrowBubble(transform.localScale.magnitude, liftable.transform.lossyScale.magnitude));
             liftable.Bubble = this;
         }
        
@@ -240,11 +240,11 @@ public class Bubble : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator GrowBubble(float liftableScale)
+    private IEnumerator GrowBubble(float startingScale, float targetScale)
     {
-        while (transform.lossyScale.magnitude < liftableScale * 2)
+        while (transform.lossyScale.magnitude < targetScale * 2)
         {
-            transform.localScale += Vector3.one * (_ctx.BubbleGrowthTime * Time.deltaTime);
+            transform.localScale += new Vector3(startingScale, startingScale, startingScale) * (_ctx.BubbleGrowthTime * Time.deltaTime);
             yield return null;
         }
     }
