@@ -29,9 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476381638887944744}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000006146638, y: -0.00000012737449, z: -7.8292695e-15,
-    w: 1}
-  m_LocalPosition: {x: 0, y: 1.4999999, z: -2.5}
+  m_LocalRotation: {x: 0.2534014, y: 0, z: 0, w: 0.9673613}
+  m_LocalPosition: {x: 0, y: 3.75, z: -3.9999995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94,12 +93,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetOffset: {x: 0, y: 1.5, z: 0}
   TrackerSettings:
-    BindingMode: 4
+    BindingMode: 5
     PositionDamping: {x: 0, y: 0, z: 0}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  OrbitStyle: 0
+  OrbitStyle: 1
   Radius: 2.5
   Orbits:
     Top:
@@ -232,7 +231,7 @@ MonoBehaviour:
       Owner: {fileID: 2792743144726708120}
       Enabled: 1
       Input:
-        InputAction: {fileID: -3203298746744478457, guid: c2f4dca1ded701444b13ecddee924b7d,
+        InputAction: {fileID: -3203298746744478457, guid: fd80b8c7c61dce849b1d1c20ddf762f4,
           type: 3}
         Gain: 0.05
         LegacyInput: 
@@ -881,7 +880,7 @@ MonoBehaviour:
   <CoyoteMaxJumpDistance>k__BackingField: 1
   <GroundMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 2241
+    m_Bits: 1
   <MinGroundedVelocity>k__BackingField: 5
   OnGrounded:
     m_PersistentCalls:
@@ -1018,12 +1017,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bubble: {fileID: 1437452151016944135, guid: 503f642ef7af02d4f872d20d157641b5, type: 3}
-  <SpawnDistance>k__BackingField: 0
-  <OffsetDistance>k__BackingField: 0
+  <SpawnDistance>k__BackingField: 1
+  <OffsetDistance>k__BackingField: 2
   <Cooldown>k__BackingField: 1
-  <MaxBubbleInstances>k__BackingField: 5
-  <ConsecutiveBubbleSpawning>k__BackingField: 0
-  <Lifespan>k__BackingField: 0
+  <MaxBubbleInstances>k__BackingField: 0
+  <ConsecutiveBubbleSpawning>k__BackingField: 1
+  <Lifespan>k__BackingField: 6
   <Buoyancy>k__BackingField: 0
   <BubbleScaleMultiplier>k__BackingField: 1
   _gunShoot:
@@ -1034,7 +1033,7 @@ MonoBehaviour:
       Data4: -1389618098
     Path: event:/SFX/BubbleGun
   _bubbles: []
-  _ctx: {fileID: 0}
+  _ctx: {fileID: 11400000, guid: 14378216260c46a4183b3ecb1601a167, type: 2}
 --- !u!4 &2124971933011451540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 13d7cf45d55cc3a4da1cfc0a4981d974,
