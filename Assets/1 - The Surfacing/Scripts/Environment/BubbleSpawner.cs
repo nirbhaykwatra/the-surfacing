@@ -10,15 +10,17 @@ public class BubbleSpawner : MonoBehaviour
     
     [Header("Spawn Settings")]
     [field: SerializeField] private float SpawnDelay { get; set; }
+
+    [Header("Bubble Attributes")]
+    [field: SerializeField]
+    public float Lifespan { get; set; } = 1f;
     
     [Header("Bubble Attributes")]
-    [field: SerializeField] public float Lifespan { get; set; }
-    
+    [field: SerializeField] public float Buoyancy { get; set; } = 1f;
+
     [Header("Bubble Attributes")]
-    [field: SerializeField] public float Buoyancy { get; set; }
-    
-    [Header("Bubble Attributes")]
-    [field: SerializeField] public float BubbleScaleMultiplier { get; set; }
+    [field: SerializeField]
+    public float BubbleScaleMultiplier { get; set; } = 1f;
 
     private float _timer;
     private bool _canSpawn;
@@ -59,6 +61,7 @@ public class BubbleSpawner : MonoBehaviour
                     bubble.Buoyancy = Buoyancy;
                     bubble.BubbleScaleMultiplier = BubbleScaleMultiplier;
                     bubble.Rise = true;
+                    Debug.Log($"Spawning bubble with lifespan {bubble.Lifespan}");
                 }
             }
             _timer = 0;

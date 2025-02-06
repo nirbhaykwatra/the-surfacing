@@ -8,12 +8,14 @@ using UnityEngine.Serialization;
 
 public class Bubble : MonoBehaviour
 {
-    
+
     [Header("Bubble Attributes")]
-    [field: SerializeField] public float Lifespan { get; set; }
-    
+    [field: SerializeField]
+    public float Lifespan { get; set; } = 1f;
+
     [Header("Bubble Attributes")]
-    [field: SerializeField] public float Buoyancy { get; set; }
+    [field: SerializeField]
+    public float Buoyancy { get; set; } = 1f;
 
     [Header("Bubble Attributes")]
     [field: SerializeField]
@@ -119,7 +121,7 @@ public class Bubble : MonoBehaviour
                 StopCoroutine(MoveBubble(transform.position, 0.1f));
             }
 
-            if (_hasTraveled)
+            if (Rise)
             {
                 _lifeSpanTimer += Time.deltaTime;
                 if (_lifeSpanTimer >= Lifespan)
