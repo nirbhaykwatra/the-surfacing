@@ -127,8 +127,9 @@ public class CharacterMovement3D : CharacterMovementBase
 
     public override void Jump()
     {
-        // calculate jump velocity from jump height and gravity
-        float jumpVelocity = Mathf.Sqrt(2f * -Gravity * JumpHeight);
+        // calculate jump velocity from jump height and gravity, accounting for drift
+        // every 10 units of gravity increased (for ex. -30 increased to -40) reduces jump distance by 0.5 units.
+        float jumpVelocity = -Gravity * Time.fixedDeltaTime / 2f + Mathf.Sqrt(2f * -Gravity * JumpHeight);
         // override current y velocity but maintain x/z velocity
         Velocity = new Vector3(Velocity.x, jumpVelocity, Velocity.z);
     }
