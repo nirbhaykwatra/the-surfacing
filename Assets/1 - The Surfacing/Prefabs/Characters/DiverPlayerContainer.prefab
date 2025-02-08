@@ -868,12 +868,10 @@ MonoBehaviour:
   <ControlRotation>k__BackingField: 1
   <Fix3DSpriteRotation>k__BackingField: 0
   <ParentToSurface>k__BackingField: 0
-  <Gravity>k__BackingField: -30
-  <JumpHeight>k__BackingField: 2
-  <JumpDistance>k__BackingField: 5
+  <Gravity>k__BackingField: -40
+  <JumpHeight>k__BackingField: 3
   <AirControl>k__BackingField: 0.5
   <AirTurning>k__BackingField: 1
-  <UseJumpDistance>k__BackingField: 1
   <Height>k__BackingField: 1.8
   <Radius>k__BackingField: 0.3
   <GroundCheckOffset>k__BackingField: 0.1
