@@ -161,7 +161,9 @@ public class Bubble : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out CharacterMovement3D character))
         {
+            StopCoroutine(MoveBubble(transform.position, 0.1f));
             Rigidbody.isKinematic = true;
+            Rise = true;
             return;
         }
         
