@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3201951952096232979}
   - component: {fileID: 6697337528700467078}
   - component: {fileID: 4888884477730253041}
+  - component: {fileID: 7669500464292726575}
   m_Layer: 12
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -29,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476381638887944744}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2534014, y: 0, z: 0, w: 0.9673613}
-  m_LocalPosition: {x: 0, y: 3.75, z: -3.9999995}
+  m_LocalRotation: {x: 0.25340116, y: 0.0011848221, z: -0.00031036546, w: 0.96736056}
+  m_LocalPosition: {x: -0.009798288, y: 3.75, z: -3.999988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,8 +109,8 @@ MonoBehaviour:
       Radius: 4
       Height: 2.25
     Bottom:
-      Radius: 2.5
-      Height: 0.1
+      Radius: 5
+      Height: -5
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
@@ -158,10 +159,10 @@ MonoBehaviour:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
       Enabled: 0
-      Size: {x: 0.2, y: 0.2}
+      Size: {x: 0.25, y: 0.37}
     HardLimits:
       Enabled: 0
-      Size: {x: 0.8, y: 0.8}
+      Size: {x: 1.75, y: 0.91}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 1.5, z: 0}
@@ -270,6 +271,25 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &7669500464292726575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476381638887944744}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0544e7b14d134a1449e61175446cfb95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 3
+  Tilt: 0
+  Pan: 0
+  Dutch: 0
+  ZoomScale: 1
+  FollowAttachment: 1
+  LookAtAttachment: 1
 --- !u!1 &1904041911644362208
 GameObject:
   m_ObjectHideFlags: 0
