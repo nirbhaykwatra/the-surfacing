@@ -3,6 +3,7 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class BubbleGun : MonoBehaviour
@@ -11,46 +12,46 @@ public class BubbleGun : MonoBehaviour
     
     [Header("Spawn Settings")]
     [field: SerializeField] public float SpawnDistance { get; set; }
-    
-    [Header("Spawn Settings")]
     [field: SerializeField] public float OffsetDistance { get; set; }
     
-    [field: SerializeField] private float Cooldown { get; set; } = 1f;
+    [field: SerializeField] public float Cooldown { get; set; } = 1f;
     [field: SerializeField] public int MaxBubbleInstances { get; set; } = 5;
     
     [Tooltip("If false, bubbles cannot be created until all player-created bubbles have popped.")]
     [field: SerializeField] public bool ConsecutiveBubbleSpawning { get; set; }
     
-    [Header("Bubble Attributes")]
+    [Header("Attributes")]
     [field: SerializeField] public float Lifespan { get; set; }
-    
-    [Header("Bubble Attributes")]
     [field: SerializeField] public float Buoyancy { get; set; }
-    
-    [Header("Bubble Attributes")]
     [field: SerializeField] public float BubbleScaleMultiplier { get; set; }
 
     [Header("Audio")]
     [field: SerializeField] public EventReference _gunShoot;
     
-    public List<Bubble> _bubbles;
+    [HideInInspector] public float CooldownTimer { get => _shootTimer; }
+    [HideInInspector] public int BubbleCount = 0;
+    
+    [HideInInspector] public List<Bubble> _bubbles;
+    public BubbleSettings _settings;
+    
     private bool _canShoot;
     private bool _bubbleSpawned = false;
     private float _shootTimer = 0;
-    private int _bubbleCount = 0;
     
-    public BubbleSettings _ctx;
+    
+    
     
     private void Awake()
     {
         _bubbles = new List<Bubble>();
         
-        if (Lifespan == 0) Lifespan = _ctx.Lifespan;
-        if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _ctx.BubbleScaleMultiplier;
-        if (Buoyancy == 0) Buoyancy = _ctx.Buoyancy;
+        if (Lifespan == 0) Lifespan = _settings.Lifespan;
+        if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _settings.BubbleScaleMultiplier;
+        if (Buoyancy == 0) Buoyancy = _settings.Buoyancy;
         
         _canShoot = true;
         _shootTimer = 0;
+        BubbleCount = MaxBubbleInstances;
     }
 
     private void Update()
@@ -68,7 +69,7 @@ public class BubbleGun : MonoBehaviour
         }
         else
         {
-            if (_bubbleCount < MaxBubbleInstances)
+            if (BubbleCount <= MaxBubbleInstances && BubbleCount > 0)
             {
                 _canShoot = true;
             }
@@ -81,16 +82,21 @@ public class BubbleGun : MonoBehaviour
                 {
                     _canShoot = true;
                     _shootTimer = 0;
-                    _bubbleCount = 0;
+                    BubbleCount = MaxBubbleInstances;
                 }
             }
         }
     }
-
-
+    
     public void TryCreateBubble()
     {
-        _bubbleCount += 1;
+        // This condition has been applied purely so that UI can use BubbleCount directly.
+        // Without this condition, UI will show BubbleCount in negative if the user keeps pressing the
+        // Create Bubble button past zero.
+        if (BubbleCount > 0)
+        {
+            BubbleCount -= 1;
+        }
         if (!_canShoot) return;
         SpawnBubble();
     }
@@ -111,14 +117,8 @@ public class BubbleGun : MonoBehaviour
             bubbleComponent.Buoyancy = Buoyancy;
             _bubbles.Add(bubbleComponent);
             
-            bubbleComponent.PushBubble(destination, Time.deltaTime * _ctx.TimeToOffset);
+            bubbleComponent.PushBubble(destination, Time.deltaTime * _settings.TimeToOffset);
         }
-    }
-
-    private IEnumerator WaitForBubbles()
-    {
-        yield return new WaitForSeconds(Cooldown);
-        _bubbleSpawned = false;
     }
     
     private void OnDrawGizmosSelected()

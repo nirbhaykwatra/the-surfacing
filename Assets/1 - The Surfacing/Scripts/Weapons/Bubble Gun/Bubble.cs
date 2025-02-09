@@ -166,6 +166,11 @@ public class Bubble : MonoBehaviour
             Rise = true;
             return;
         }
+
+        if (collision.gameObject.TryGetComponent(out Bubble bubble))
+        {
+            _hasPopped = true;
+        }
         
         if (collision.gameObject.TryGetComponent(out Liftable liftable))
         {
