@@ -103,7 +103,7 @@ MonoBehaviour:
   Orbits:
     Top:
       Radius: 2
-      Height: 5
+      Height: 4
     Center:
       Radius: 4
       Height: 2.25
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 5
-  <Acceleration>k__BackingField: 6
+  <Acceleration>k__BackingField: 7
   <TurnSpeed>k__BackingField: 100
   <StoppingDistance>k__BackingField: 0.25
   <LookInMoveDirection>k__BackingField: 1
@@ -880,7 +880,7 @@ MonoBehaviour:
   <CoyoteMaxJumpDistance>k__BackingField: 1
   <GroundMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 9
   <MinGroundedVelocity>k__BackingField: 5
   OnGrounded:
     m_PersistentCalls:
@@ -1019,10 +1019,10 @@ MonoBehaviour:
   _bubble: {fileID: 1437452151016944135, guid: 503f642ef7af02d4f872d20d157641b5, type: 3}
   <SpawnDistance>k__BackingField: 1
   <OffsetDistance>k__BackingField: 2
-  <Cooldown>k__BackingField: 1
-  <MaxBubbleInstances>k__BackingField: 0
-  <ConsecutiveBubbleSpawning>k__BackingField: 1
-  <Lifespan>k__BackingField: 6
+  <Cooldown>k__BackingField: 5
+  <MaxBubbleInstances>k__BackingField: 2
+  <ConsecutiveBubbleSpawning>k__BackingField: 0
+  <Lifespan>k__BackingField: 2
   <Buoyancy>k__BackingField: 0
   <BubbleScaleMultiplier>k__BackingField: 1
   _gunShoot:
@@ -1032,8 +1032,9 @@ MonoBehaviour:
       Data3: -617912167
       Data4: -1389618098
     Path: event:/SFX/BubbleGun
+  BubbleCount: 0
   _bubbles: []
-  _ctx: {fileID: 11400000, guid: 14378216260c46a4183b3ecb1601a167, type: 2}
+  _settings: {fileID: 11400000, guid: 14378216260c46a4183b3ecb1601a167, type: 2}
 --- !u!4 &2124971933011451540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 13d7cf45d55cc3a4da1cfc0a4981d974,
