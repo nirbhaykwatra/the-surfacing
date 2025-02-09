@@ -1036,13 +1036,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928f1f50c122fc445976e268f7b81ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubble: {fileID: 1437452151016944135, guid: 503f642ef7af02d4f872d20d157641b5, type: 3}
   <SpawnDistance>k__BackingField: 1
   <OffsetDistance>k__BackingField: 2
+  <TimeToOffset>k__BackingField: 0
   <Cooldown>k__BackingField: 5
   <MaxBubbleInstances>k__BackingField: 2
   <ConsecutiveBubbleSpawning>k__BackingField: 0
+  _bubble: {fileID: 1437452151016944135, guid: 503f642ef7af02d4f872d20d157641b5, type: 3}
   <Lifespan>k__BackingField: 2
+  _totalLifespan: 2
   <Buoyancy>k__BackingField: 0
   <BubbleScaleMultiplier>k__BackingField: 1
   _gunShoot:

@@ -30,8 +30,6 @@ public class Bubble : MonoBehaviour
     public Rigidbody Rigidbody;
     public BoxCollider Collider;
     private bool _hasPopped;
-    private bool _isAttached;
-    private bool _hasTraveled;
     private bool _hasLeftCurrent;
     private float _lifeSpanTimer;
     private BubbleGun _bubbleGun;
@@ -58,8 +56,6 @@ public class Bubble : MonoBehaviour
         Rise = false;
         InCurrent = false;
         _hasPopped = false;
-        _isAttached = false;
-        _hasTraveled = false;
         _hasLeftCurrent = false;
     }
 
@@ -138,7 +134,6 @@ public class Bubble : MonoBehaviour
         else
         {
             _lifeSpanTimer = 0;
-            _isAttached = false;
             if (_bubbleGun != null)
             {
                 if (_bubbleGun._bubbles.Contains(this))
@@ -163,7 +158,6 @@ public class Bubble : MonoBehaviour
         {
             StopCoroutine(MoveBubble(transform.position, 0.1f));
             Rigidbody.isKinematic = true;
-            Rise = true;
             return;
         }
 
@@ -251,7 +245,6 @@ public class Bubble : MonoBehaviour
             }
             yield return null;
         }
-        _hasTraveled = true;
         Rise = true;
         yield break;
     }
