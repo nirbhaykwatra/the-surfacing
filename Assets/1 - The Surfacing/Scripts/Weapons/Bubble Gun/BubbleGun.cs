@@ -35,7 +35,6 @@ public class BubbleGun : MonoBehaviour
     public BubbleSettings _settings;
     
     private bool _canShoot;
-    private bool _bubbleSpawned = false;
     private float _shootTimer = 0;
     
     

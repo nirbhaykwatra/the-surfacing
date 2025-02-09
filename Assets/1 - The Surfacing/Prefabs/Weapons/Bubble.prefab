@@ -113,9 +113,9 @@ MonoBehaviour:
       Data3: -780319059
       Data4: -321020348
     Path: event:/SFX/BubblePop
-  Rigidbody: {fileID: 0}
-  _collider: {fileID: 0}
-  _ctx: {fileID: 11400000, guid: 14378216260c46a4183b3ecb1601a167, type: 2}
+  Rigidbody: {fileID: 2776342330697443083}
+  Collider: {fileID: 2316871265444878578}
+  _settings: {fileID: 11400000, guid: 14378216260c46a4183b3ecb1601a167, type: 2}
   OnDestroyed:
     m_PersistentCalls:
       m_Calls:

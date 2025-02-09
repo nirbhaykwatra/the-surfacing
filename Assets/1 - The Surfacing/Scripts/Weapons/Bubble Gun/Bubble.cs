@@ -28,7 +28,7 @@ public class Bubble : MonoBehaviour
     [field: SerializeField] public EventReference _bubblePop;
     
     public Rigidbody Rigidbody;
-    public BoxCollider _collider;
+    public BoxCollider Collider;
     private bool _hasPopped;
     private bool _isAttached;
     private bool _hasTraveled;
@@ -39,7 +39,7 @@ public class Bubble : MonoBehaviour
     private Vector3 _currentPosition = new Vector3();
     private Vector3 _kinematicVelocity = new Vector3();
     
-    public BubbleSettings _ctx;
+    public BubbleSettings _settings;
     public UnityEvent OnDestroyed;
     
     public bool HasLeftCurrent { get => _hasLeftCurrent; set => _hasLeftCurrent = value; }
@@ -49,11 +49,11 @@ public class Bubble : MonoBehaviour
     private void OnEnable()
     {
         Rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<BoxCollider>();
+        Collider = GetComponent<BoxCollider>();
         _bubbleGun = FindAnyObjectByType<BubbleGun>();
-        if (Lifespan == 0) Lifespan = _ctx.Lifespan;
-        if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _ctx.BubbleScaleMultiplier;
-        if (Buoyancy == 0) Buoyancy = _ctx.Buoyancy;
+        if (Lifespan == 0) Lifespan = _settings.Lifespan;
+        if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _settings.BubbleScaleMultiplier;
+        if (Buoyancy == 0) Buoyancy = _settings.Buoyancy;
         transform.localScale *= BubbleScaleMultiplier;
         Rise = false;
         InCurrent = false;
@@ -85,7 +85,7 @@ public class Bubble : MonoBehaviour
                 }
                 else
                 {
-                    Rigidbody.linearVelocity = Vector3.Lerp(Rigidbody.linearVelocity, Vector3.zero, Time.fixedDeltaTime * _ctx.TimeToOffset);
+                    Rigidbody.linearVelocity = Vector3.Lerp(Rigidbody.linearVelocity, Vector3.zero, Time.fixedDeltaTime * _settings.TimeToOffset);
 
                     if (Rigidbody.linearVelocity.magnitude < 0.05f)
                     {
@@ -174,7 +174,7 @@ public class Bubble : MonoBehaviour
         
         if (collision.gameObject.TryGetComponent(out Liftable liftable))
         {
-            _collider.isTrigger = true;
+            Collider.isTrigger = true;
             return;
         }
 
@@ -214,7 +214,7 @@ public class Bubble : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Liftable liftable))
         {
             liftable.Bubble = null;
-            _collider.isTrigger = false;
+            Collider.isTrigger = false;
         }
         
         if (other.gameObject.layer == LayerMask.NameToLayer("Current"))
@@ -232,7 +232,7 @@ public class Bubble : MonoBehaviour
 
     private IEnumerator MoveBubble(Vector3 destination, float time)
     {
-        while (Vector3.Distance(transform.position, destination) > _ctx.AttachmentOffset)
+        while (Vector3.Distance(transform.position, destination) > _settings.AttachmentOffset)
         {
             if (Rigidbody.isKinematic)
             {
@@ -253,7 +253,7 @@ public class Bubble : MonoBehaviour
     {
         while (transform.lossyScale.magnitude < targetScale * 2)
         {
-            transform.localScale += new Vector3(startingScale, startingScale, startingScale) * (_ctx.BubbleGrowthTime * Time.deltaTime);
+            transform.localScale += new Vector3(startingScale, startingScale, startingScale) * (_settings.BubbleGrowthTime * Time.deltaTime);
             yield return null;
         }
     }
@@ -266,6 +266,6 @@ public class Bubble : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, _collider.size);
+        Gizmos.DrawWireCube(transform.position, Collider.size);
     }
 }
