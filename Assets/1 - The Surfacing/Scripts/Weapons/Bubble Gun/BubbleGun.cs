@@ -13,7 +13,7 @@ public class BubbleGun : MonoBehaviour
     [Header("Spawn Settings")]
     [field: SerializeField] public float SpawnDistance { get; set; }
     [field: SerializeField] public float OffsetDistance { get; set; }
-    
+    [field: SerializeField] public float TimeToOffset { get; set; }
     [field: SerializeField] public float Cooldown { get; set; } = 1f;
     [field: SerializeField] public int MaxBubbleInstances { get; set; } = 5;
     
@@ -47,6 +47,7 @@ public class BubbleGun : MonoBehaviour
         if (Lifespan == 0) Lifespan = _settings.Lifespan;
         if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _settings.BubbleScaleMultiplier;
         if (Buoyancy == 0) Buoyancy = _settings.Buoyancy;
+        if (TimeToOffset == 0) TimeToOffset = _settings.TimeToOffset;
         
         _canShoot = true;
         _shootTimer = 0;
@@ -121,7 +122,7 @@ public class BubbleGun : MonoBehaviour
             bubbleComponent.Buoyancy = Buoyancy;
             _bubbles.Add(bubbleComponent);
             
-            bubbleComponent.PushBubble(destination, Time.deltaTime * _settings.TimeToOffset);
+            bubbleComponent.PushBubble(destination, Time.deltaTime * TimeToOffset);
         }
     }
     
