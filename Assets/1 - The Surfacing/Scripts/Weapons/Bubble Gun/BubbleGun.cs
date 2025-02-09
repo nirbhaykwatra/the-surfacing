@@ -37,12 +37,12 @@ public class BubbleGun : MonoBehaviour
     private bool _canShoot;
     private float _shootTimer = 0;
     
-    
-    
+    private CharacterMovement3D _character;
     
     private void Awake()
     {
         _bubbles = new List<Bubble>();
+        _character = GetComponent<CharacterMovement3D>();
         
         if (Lifespan == 0) Lifespan = _settings.Lifespan;
         if (BubbleScaleMultiplier == 0) BubbleScaleMultiplier = _settings.BubbleScaleMultiplier;
@@ -79,9 +79,7 @@ public class BubbleGun : MonoBehaviour
 
                 if (_shootTimer >= Cooldown)
                 {
-                    _canShoot = true;
-                    _shootTimer = 0;
-                    BubbleCount = MaxBubbleInstances;
+                    ResetBubbleCooldown();
                 }
             }
         }
@@ -98,6 +96,13 @@ public class BubbleGun : MonoBehaviour
         }
         if (!_canShoot) return;
         SpawnBubble();
+    }
+
+    private void ResetBubbleCooldown()
+    {
+        _canShoot = true;
+        _shootTimer = 0;
+        BubbleCount = MaxBubbleInstances;
     }
 
     private void SpawnBubble()
