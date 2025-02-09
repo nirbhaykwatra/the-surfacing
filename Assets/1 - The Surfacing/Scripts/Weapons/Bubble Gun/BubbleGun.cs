@@ -2,15 +2,15 @@ using System;
 using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 
 public class BubbleGun : MonoBehaviour
 {
-    [SerializeField] private GameObject _bubble;
     
-    [Header("Spawn Settings")]
+    [field: Header("Spawn Settings")]
     [field: SerializeField] public float SpawnDistance { get; set; }
     [field: SerializeField] public float OffsetDistance { get; set; }
     [field: SerializeField] public float TimeToOffset { get; set; }
@@ -19,9 +19,12 @@ public class BubbleGun : MonoBehaviour
     
     [Tooltip("If false, bubbles cannot be created until all player-created bubbles have popped.")]
     [field: SerializeField] public bool ConsecutiveBubbleSpawning { get; set; }
+
     
-    [Header("Attributes")]
+    [field: Header("Bubble Settings")]
+    [SerializeField] private GameObject _bubble;
     [field: SerializeField] public float Lifespan { get; set; }
+    [SerializeField] [ReadOnly] private float _totalLifespan;
     [field: SerializeField] public float Buoyancy { get; set; }
     [field: SerializeField] public float BubbleScaleMultiplier { get; set; }
 
@@ -38,7 +41,12 @@ public class BubbleGun : MonoBehaviour
     private float _shootTimer = 0;
     
     private CharacterMovement3D _character;
-    
+
+    private void OnValidate()
+    {
+        _totalLifespan = TimeToOffset + Lifespan;
+    }
+
     private void Awake()
     {
         _bubbles = new List<Bubble>();
@@ -122,7 +130,7 @@ public class BubbleGun : MonoBehaviour
             bubbleComponent.Buoyancy = Buoyancy;
             _bubbles.Add(bubbleComponent);
             
-            bubbleComponent.PushBubble(destination, Time.deltaTime * TimeToOffset);
+            bubbleComponent.PushBubble(destination, TimeToOffset);
         }
     }
     

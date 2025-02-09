@@ -232,15 +232,22 @@ public class Bubble : MonoBehaviour
 
     private IEnumerator MoveBubble(Vector3 destination, float time)
     {
+        // Cache the starting position of the bubble so that the starting point of the lerp is not updated
+        // every frame. Otherwise, the bubble will lerp from its own position to the offset every frame,
+        // instead of from the spawn position to the offset. This makes the TimeToOffset dynamic, which is
+        // undesirable as our bubble's total lifespan = TimeToOffset + Lifespan.
+        float timer = 0;
+        Vector3 startPosition = transform.position;
         while (Vector3.Distance(transform.position, destination) > _settings.AttachmentOffset)
         {
+            timer += Time.deltaTime / time;
             if (Rigidbody.isKinematic)
             {
-                Rigidbody.MovePosition(Vector3.Lerp(transform.position, destination, time));
+                Rigidbody.MovePosition(Vector3.Lerp(startPosition, destination, timer));
             }
             else
             {
-                Rigidbody.Move(Vector3.Lerp(transform.position, destination, time), Quaternion.identity);
+                Rigidbody.Move(Vector3.Lerp(startPosition, destination, timer), Quaternion.identity);
             }
             yield return null;
         }
