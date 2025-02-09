@@ -41,6 +41,7 @@ public class UnstablePlatform : MonoBehaviour
             if (_timer >= RespawnTime)
             {
                 Respawn();
+                _timer = 0;
                 _broken = false;
             }
         }
@@ -56,6 +57,7 @@ public class UnstablePlatform : MonoBehaviour
 
     private void Respawn()
     {
+        _meshRenderer.material.color = Color.white;
         _meshRenderer.enabled = true;
         _collider.enabled = true;
     }
