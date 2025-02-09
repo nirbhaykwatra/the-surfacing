@@ -41,8 +41,7 @@ public class PlayerController : MonoBehaviour
 
     public virtual void OnFire(InputValue value)
     {
-        //  TODO: Create tunable value for bubble spawn distance from the player.
-        BubbleGun.CreateBubble();
+        BubbleGun.TryCreateBubble();
     }
 
     protected virtual void Update()

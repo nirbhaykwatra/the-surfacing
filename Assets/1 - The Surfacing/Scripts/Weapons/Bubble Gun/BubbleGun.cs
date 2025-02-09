@@ -1,3 +1,4 @@
+using System;
 using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,7 +35,9 @@ public class BubbleGun : MonoBehaviour
     
     public List<Bubble> _bubbles;
     private bool _canShoot;
-    private float _shootTimer;
+    private bool _bubbleSpawned = false;
+    private float _shootTimer = 0;
+    private int _bubbleCount = 0;
     
     public BubbleSettings _ctx;
     
@@ -49,46 +52,47 @@ public class BubbleGun : MonoBehaviour
         _canShoot = true;
         _shootTimer = 0;
     }
-    
+
     private void Update()
     {
-        if (MaxBubbleInstances != 0)
+        if (ConsecutiveBubbleSpawning)
         {
-            if (_bubbles.Count - 1 >= MaxBubbleInstances)
+            if (_bubbles.Count < MaxBubbleInstances)
             {
-                if (_bubbles[0] != null)
-                {
-                    Destroy(_bubbles[0].gameObject);
-                    _bubbles.RemoveAt(0);
-                }
-            }
-        }
-        else
-        {
-            return;
-        }
-    }
-
-    public void CreateBubble()
-    {
-        if (MaxBubbleInstances != 0)
-        {
-            if (ConsecutiveBubbleSpawning)
-            {
-                if (_bubbles.Count >= MaxBubbleInstances) return;
+                _canShoot = true;
             }
             else
             {
-                if (_bubbles.Count >= MaxBubbleInstances) StartCoroutine(WaitForBubbles());
+                _canShoot = false;
             }
-            if (!_canShoot) return;
-            
-            SpawnBubble();
         }
         else
         {
-            SpawnBubble();
+            if (_bubbleCount < MaxBubbleInstances)
+            {
+                _canShoot = true;
+            }
+            else
+            {
+                _canShoot = false;
+                _shootTimer += Time.deltaTime;
+
+                if (_shootTimer >= Cooldown)
+                {
+                    _canShoot = true;
+                    _shootTimer = 0;
+                    _bubbleCount = 0;
+                }
+            }
         }
+    }
+
+
+    public void TryCreateBubble()
+    {
+        _bubbleCount += 1;
+        if (!_canShoot) return;
+        SpawnBubble();
     }
 
     private void SpawnBubble()
@@ -106,15 +110,15 @@ public class BubbleGun : MonoBehaviour
             bubbleComponent.Lifespan = Lifespan;
             bubbleComponent.Buoyancy = Buoyancy;
             _bubbles.Add(bubbleComponent);
+            
             bubbleComponent.PushBubble(destination, Time.deltaTime * _ctx.TimeToOffset);
         }
     }
 
     private IEnumerator WaitForBubbles()
     {
-        _canShoot = false;
         yield return new WaitForSeconds(Cooldown);
-        _canShoot = true;
+        _bubbleSpawned = false;
     }
     
     private void OnDrawGizmosSelected()
