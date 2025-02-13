@@ -20,6 +20,7 @@ public abstract class CharacterMovementBase : MonoBehaviour
 
     [field: Header("Airborne")]
     [field: SerializeField] public float Gravity { get; set; } = -20f;             // custom gravity value
+    [field: SerializeField] public float JumpGravityMultiplier { get; set; } = 5f; // amount gravity is multiplied by after player hits peak of jump
     [field: SerializeField] public float JumpHeight { get; set; } = 2.25f;         // peak height of jump
     [field: SerializeField] public float AirControl { get; set; } = 0.1f;          // percentage of acceleration applied while airborne
     [field: SerializeField] public bool AirTurning { get; set; } = true;           // character can turn while airborne

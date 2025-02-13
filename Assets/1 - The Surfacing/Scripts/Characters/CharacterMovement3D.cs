@@ -129,7 +129,8 @@ public class CharacterMovement3D : CharacterMovementBase
     {
         // calculate jump velocity from jump height and gravity, accounting for drift
         // every 10 units of gravity increased (for ex. -30 increased to -40) reduces jump distance by 0.5 units.
-        float jumpVelocity = -Gravity * Time.fixedDeltaTime / 2f + Mathf.Sqrt(2f * -Gravity * JumpHeight);
+        float jumpVelocity = -Gravity * Time.fixedDeltaTime / 2f + Mathf.Sqrt(-Gravity * JumpHeight);
+        
         // override current y velocity but maintain x/z velocity
         Velocity = new Vector3(Velocity.x, jumpVelocity, Velocity.z);
     }
@@ -215,7 +216,14 @@ public class CharacterMovement3D : CharacterMovementBase
         // zeros acceleration if airborne and not trying to move (allows for nice jumping arcs)
         //if (!IsGrounded && !HasMoveInput) acceleration = Vector3.zero;
         // add gravity
-        acceleration += GroundNormal * Gravity;
+        if (Rigidbody.linearVelocity.y < 0)
+        {
+            acceleration += GroundNormal * (Gravity * JumpGravityMultiplier);
+        }
+        else
+        {
+            acceleration += GroundNormal * Gravity;
+        }
 
         Rigidbody.AddForce(acceleration * Rigidbody.mass);
 
