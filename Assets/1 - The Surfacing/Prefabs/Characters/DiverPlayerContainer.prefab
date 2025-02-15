@@ -889,7 +889,6 @@ MonoBehaviour:
   <Gravity>k__BackingField: -40
   <JumpGravityMultiplier>k__BackingField: 5
   <JumpHeight>k__BackingField: 4.5
-  <JumpDistance>k__BackingField: 7
   <AirControl>k__BackingField: 0.5
   <AirTurning>k__BackingField: 1
   <Height>k__BackingField: 1.8

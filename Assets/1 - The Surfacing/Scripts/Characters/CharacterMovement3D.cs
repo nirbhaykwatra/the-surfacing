@@ -267,7 +267,7 @@ public class CharacterMovement3D : CharacterMovementBase
         {
             if (hitInfo.rigidbody.gameObject.TryGetComponent(out Bubble bubble))
             {
-                SurfaceVelocity = bubble.Velocity;
+                SurfaceVelocity = bubble.Rigidbody.linearVelocity;
             }
             else
             {
